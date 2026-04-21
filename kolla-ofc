@@ -1,0 +1,30 @@
+->copy all those files of one-repo to newproject-jenkins by copy –r one/* newproject-jenkins/
+
+->now goto that newproject-jenkins>git add *>git commit –m “committting to new-repo” .>git push origin main>it’ll ask fr cresentials uname,token
+
+->now goto github>newproject-jenkins repo n chk whether source code files in remote or not
+
+->ee server lo tomcat install cheyye
+
+->oka ec2 server launch chesi danlo jenkins install chesi, pipeline stage view,deploy to container plugins install cheyye n maven ni koda install cheyye
+
+PIPELINE FOR DEPLOY
+
+->create a pipeline with 4-stages 1 fr code to get code, 2 for build, 3 for artifact(jst print stat add cheyye), 4 fr deploy
+
+->but ippudu client new req add chesaru like ui change cheyyamani
+
+->deepseek ni use chesi a inde file code teesukoni ui change ki code adugu
+
+->direct ga main branch lo change cheyyakodadhu, so oka develop aney branch create cheyye main branch nunchi, a develop aney branch nunchi ui-changes ani oka branch create cheyye – deenlo ui changes chesi, ee branch ni oka new server lo deploy cheyye
+
+->new server lo tomcat install cheyye
+
+->jenkins server lo new job create cheyye, again no need to write new pipeline,we’ll get option duplicate an existing item(already prod ki rasina pipeline dev ki vastadi)
+
+->continue at 1hr
+
+
+
+
+
