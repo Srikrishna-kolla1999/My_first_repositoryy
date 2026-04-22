@@ -22,7 +22,11 @@ PIPELINE FOR DEPLOY
 
 ->jenkins server lo new job create cheyye, again no need to write new pipeline,we’ll get option duplicate an existing item(already prod ki rasina pipeline dev ki vastadi)
 
-->continue at 1hr
+->branchname chnage avutundi so adi change cheyye n tomcat url also
+->artifact akkarledu kabati adi teeseyandi
+->now build pipeline,after success inko test branch create cheyye ui-changes branch nunchi
+->malli inko server lo tomcat install chesi danlo ee test ki rasina pipeline deploy cheyye
+->after testing everything is fine merge changes to main branch
 
 
 
