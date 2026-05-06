@@ -28,7 +28,20 @@ PIPELINE FOR DEPLOY
 ->malli inko server lo tomcat install chesi danlo ee test ki rasina pipeline deploy cheyye
 ->after testing everything is fine merge changes to main branch
 
-
+CLASS-8
+->realtime lo manam wrk chesey applications anni micro-services meda ey wrk avutai
+->let's take a e-commerce app having diff services like frontend,backend,payment gateway(PGW)
+razorpay n databases
+->frontend will communicate vth backend ,backend vth pgw, pgw vth db n db vth backend
+->but manam ee servcies anni oka network lo pedithey anni communicate avutai butparticular servc corresponding serv ki ey communicate avvali so anni services techi oka netwrok lo pettakodadhu.
+->Better practice is to maintain required networks only
+DOCKER NETWORK - used to communicate  between containers or to restrict the communication
+TYPES OF NETWORKS
+1 bridge(def nkt)
+2 host
+3 none
+4 overlay
+->
 
 
 
