@@ -41,7 +41,29 @@ TYPES OF NETWORKS
 2 host
 3 none
 4 overlay
+->to see list of networs
+docker network ls
+->create a 2 containers(niginix n httpd)
+->every cont runs on bridge nkt (to chk cont in which nkt it's running, docker inspect cont_name)
+-> to check network of a container
+docker inspect cont_name | grep -i "network"
+->to check bridge of a container
+docker inspect cont_name | grep -i "bridge"
+->to check ip of a container
+docker inspect cont_name | grep -i "ipaddress"
+->create 2 containers
+->to chk containers are communicating eachother or not
+container loki velli chk cheyyali communicate avutundha leda ani but cont lopalaki vellakunda bayata nunchi ey chk cheyyachu communicate avutundha leda ani
+docker exec -it cont1 ping ip of another container
+->ping aney package container lo install avvaledu so install vthout gng inside of it
+1st update =docker exec -it cnt-name apt update -y
+2nd install ping package =docker exec -it cont-name apt install iputils-ping -y
+->now chk cont1 is communicating vth cont2
+docker exec -it cont1 ping ip of another container2
+NOTE- container lopala ki velli koda chk cheyyachu communication jarugutunda containers madya
 ->
+
+
 
 
 
