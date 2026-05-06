@@ -1,67 +1,6 @@
-->copy all those files of one-repo to newproject-jenkins by copy –r one/* newproject-jenkins/
 
-->now goto that newproject-jenkins>git add *>git commit –m “committting to new-repo” .>git push origin main>it’ll ask fr cresentials uname,token
 
-->now goto github>newproject-jenkins repo n chk whether source code files in remote or not
-
-->ee server lo tomcat install cheyye
-
-->oka ec2 server launch chesi danlo jenkins install chesi, pipeline stage view,deploy to container plugins install cheyye n maven ni koda install cheyye
-
-PIPELINE FOR DEPLOY
-
-->create a pipeline with 4-stages 1 fr code to get code, 2 for build, 3 for artifact(jst print stat add cheyye), 4 fr deploy
-
-->but ippudu client new req add chesaru like ui change cheyyamani
-
-->deepseek ni use chesi a inde file code teesukoni ui change ki code adugu
-
-->direct ga main branch lo change cheyyakodadhu, so oka develop aney branch create cheyye main branch nunchi, a develop aney branch nunchi ui-changes ani oka branch create cheyye – deenlo ui changes chesi, ee branch ni oka new server lo deploy cheyye
-
-->new server lo tomcat install cheyye
-
-->jenkins server lo new job create cheyye, again no need to write new pipeline,we’ll get option duplicate an existing item(already prod ki rasina pipeline dev ki vastadi)
-
-->branchname chnage avutundi so adi change cheyye n tomcat url also
-->artifact akkarledu kabati adi teeseyandi
-->now build pipeline,after success inko test branch create cheyye ui-changes branch nunchi
-->malli inko server lo tomcat install chesi danlo ee test ki rasina pipeline deploy cheyye
-->after testing everything is fine merge changes to main branch
-
-CLASS-8
-->realtime lo manam wrk chesey applications anni micro-services meda ey wrk avutai
-->let's take a e-commerce app having diff services like frontend,backend,payment gateway(PGW)
-razorpay n databases
-->frontend will communicate vth backend ,backend vth pgw, pgw vth db n db vth backend
-->but manam ee servcies anni oka network lo pedithey anni communicate avutai butparticular servc corresponding serv ki ey communicate avvali so anni services techi oka netwrok lo pettakodadhu.
-->Better practice is to maintain required networks only
-DOCKER NETWORK - used to communicate  between containers or to restrict the communication
-TYPES OF NETWORKS
-1 bridge(def nkt)
-2 host
-3 none
-4 overlay
-->to see list of networs
-docker network ls
-->create a 2 containers(niginix n httpd)
-->every cont runs on bridge nkt (to chk cont in which nkt it's running, docker inspect cont_name)
--> to check network of a container
-docker inspect cont_name | grep -i "network"
-->to check bridge of a container
-docker inspect cont_name | grep -i "bridge"
-->to check ip of a container
-docker inspect cont_name | grep -i "ipaddress"
-->create 2 containers
-->to chk containers are communicating eachother or not
-container loki velli chk cheyyali communicate avutundha leda ani but cont lopalaki vellakunda bayata nunchi ey chk cheyyachu communicate avutundha leda ani
-docker exec -it cont1 ping ip of another container
-->ping aney package container lo install avvaledu so install vthout gng inside of it
-1st update =docker exec -it cnt-name apt update -y
-2nd install ping package =docker exec -it cont-name apt install iputils-ping -y
-->now chk cont1 is communicating vth cont2
-docker exec -it cont1 ping ip of another container2
-NOTE- container lopala ki velli koda chk cheyyachu communication jarugutunda containers madya
-->
+CLASS-
 
 
 
