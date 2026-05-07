@@ -1,6 +1,56 @@
 
 
-CLASS-
+CLASS-9
+->volumes are used to share the data between multiple containers
+->volumes are independent of containers
+->while creating container only we can attach volumes, fr created containers we can't attach volumes
+->voulmes depends on EBS volumes
+CREATING VOLUMES
+->launch an instance vth t3 micro
+->install docker n start
+->chk any volumes are available
+docker volume ls
+->to create a volume
+docker volume create vol-name
+->to know abt volumes
+docker volume inspect vol-nmae
+->def path for docker 
+/var/lib/docker = we can see images,containers,volumes,networks
+->goto that volumes folder>give ll n see what available
+->goto ur created volume, in that by def _data folder is available goto that folder n give ll nothing will be available
+HOW TO ATTACH VOLUMES TO CONTAINER
+->To attach vol to container
+docker run -itd --name cont-name --mount src=vol-name,destination=/ur_own_folder(data will store here) image
+docker run -itd --name cont1 --mount src=mydata,destination=/kdevops ubuntu
+NOTE - 1.we can attach vol to diff containers, if containers deleted also data will be available in volumes
+2. we can create diff vol's to one container also
+->to chk vol attached to cont or not
+goto cont>give ll
+docker exec -it cont-name bash
+ll
+we can see that vol attached to cont or not
+NOTE - 1.if we del data(files) in cont's, then data gets deleted in volumes also vice-versa in volm's also
+2. oka cont lo add chesthey data inko cont n vol lo koda add avutadi
+->to del a vol(a vol ey cont ki attach chesi undakodadhu)
+docker volume rm vol-name
+->to connect to n/w
+docker network connect network-name cont-name
+->to disconnect to n/w
+docker network disconnect network-name cont-name
+->remove all unused networks
+docker network prune
+->to remove unused volumes
+docker volume prune
+->to remove images in a run state
+docker image prune
+IQ- you have unused cont's,vol's,n/w's n images.how you'll del all these at a time
+docker system prune
+
+
+
+RESUME AT 1hr
+
+
 
 
 
