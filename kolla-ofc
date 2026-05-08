@@ -70,9 +70,27 @@ READ-ONLY
 ->oka cont ki read-only(write cheyyalem) ela cheyyachu
 docker run -itd --name cont-name -p 1111:80 --mount src=flm,destination=/myappdata,readonly ubuntu
 ->ee cont loki velli oka file create cheyyadaniki try cheyye avvadu bcz manam read-only ey ichamu
-
-
-
+->ivi anni named volumes ey
+CLASS-10
+DOCKER VOLUMES
+1.named(realtime lo vadedhi)
+2 anonymous(unnamed)
+3 bind mounts(fr developers)
+BIND MOUNT
+->docker host lo oka path ni cont lo oka path ki bind/mount cheyyadam ni bind mount, so docker host path lo data add/del chesthey automatic ga cont path lo koda update avutadi
+->named vol lo vol create chesi a vol ni cont lo oka path ki attach chestunam
+PRACTICAL IMPLEMENTATION OF BIND MOUNT
+->root lo oka dir create chesi, a dir lopala ki velli
+->now attach the pwd path to cont path by using bind mount
+->to create a bind mount
+docker run -itd --name cont-name -p 1111:80 -v $("pwd"):/usr/share/nginx/html nginx
+docker run -itd --name cont1 -p 1111:80 -v $("pwd"):/usr/share/nginx/html nginx
+ee cmd meaning enti antey pwd lo unna files anni cont def path ki copy avutai(pwd lo app ki sambandinchina files untey cont lo app run avutadi bcz manam cp chestundi cont def path ki kabatti)
+->now chk any vol ctrated
+docker volume ls
+ey volumes create avvavu
+->developers develop chesthu parallel ga chk chesukovachu
+->access with ip n port no
 
 RESUME AT hr
 
