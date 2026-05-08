@@ -45,10 +45,36 @@ docker volume prune
 docker image prune
 IQ- you have unused cont's,vol's,n/w's n images.how you'll del all these at a time
 docker system prune
+REALTIME EXAMPLE FOR VOLUMES
+->lets take one scenario, oka vol teesukoni a vol lo data(nothing but code) pedithey a data container lo koda store avutadi. ee vol ni teesukoni oka 100 containers ki attach chesthey a 100 cont's lo app run avutunnattey ga
+->ee eg lo manam teesukoney cont oka nginx anukundam
+IMPLEMENTATION
+->oka vol create chedamu
+docker volume create appvolume
+->a vol ni cont ki attach chedamu
+docker run -itd --name appcont1 -p 1111:80 --mount src=appvolume,destination=/usr/share/nginx/html/ nginx
+->now goto vol def path n add source code
+cd /var/lib/volumes/appvolume/_data/
+ll
+by def ga index.html untadi danlo mana source code pedadam(write a basic html code fr a small site)
+->access app chesukundam by server ip:1111, succesfully we can access
+->now attach the appvolume to diff cont's
+docker run -itd --name appcont2 -p 2222:80 --mount src=appvolume,destination=/usr/share/nginx/html/ nginx
+docker run -itd --name appcont3 -p 3333:80 --mount src=appvolume,destination=/usr/share/nginx/html/ nginx
+->ippudu cont's or vol lo data change chesina annitlo reflect avutadi
+READ-ONLY
+->ee read-only concept enduku vachindi antey realtime lo chala databases untai, 1st db ni primary(read n write),2nd db ni secondary(only read),3rd db ni sec(read only)....etc ga pedataru
+->1st db ki write permission istunam antey deenloney data add avutadi,so anni db's lo write chesina data update avvali antey data reflect avvali so we need to use volumes concept
+->as a devops engineer ki telsu ey db lo data write avutundi ani manam a db cont loki velli data update/del chesthey pbm vastadi kabatti 
+->we can restrict that with read-only concept
+->oka cont ki read-only(write cheyyalem) ela cheyyachu
+docker run -itd --name cont-name -p 1111:80 --mount src=flm,destination=/myappdata,readonly ubuntu
+->ee cont loki velli oka file create cheyyadaniki try cheyye avvadu bcz manam read-only ey ichamu
 
 
 
-RESUME AT 1hr
+
+RESUME AT hr
 
 
 
