@@ -1,48 +1,8 @@
 
 
 
-CLASS-13 DOCKER SWARM
-->docker-compose=creating mul serv's on single host
-->docker-swarm=creating a serv on mul hosts
-->stack=compose+swarm
-creating mul servs on multiple hosts
-->realtime we use docker-stack only
-DOCKER SWARM
-->swarm = used to run a single serv on mul hosts
-->cluster = grp of servers
-->ee clustrs lo 2 types of hosts untai, manager n workers(worker1, worker2....)
-->manager = is used to manage app's(updates,rollbacks)
-->worker = is used to run app's
-->launch 1 server n chnage servername n hostname to manager and 2 servers, change servername n servername n hostname to worker1 n worker2
-->install docker in all servers
-->to set-up manager n worker, in manager give cmd
-  docker swarm init
-->paina cmd run chesaka oka 2 list avutai, avi chadivi worker lo run cheyye a cmds
-->to chk the list of workers
-  docker node ls(manager node koda kanipistadi)
-->to create a service in swarm
-  docker service create --name serv_name --publish host_port:cont_port dockerhub_image_name
-  docker service create --name flm --publish 1111:80 shaikmustafa/dm
-NOTE - swarm lo dockerhub lo images ey ivvali
-->to see list of services
-  docker services ls
-->container create ayyindho ledho chudali, only worker nodes loney create avutai(adi denlo create avutai ani cheppalem)
-->oka dbt app worker1 node lo create aithey, only worker1 nunchi ey access cheyyagalama--no we can access frm worker2/manager also
-->whats the need of service running in mul hosts?
- fr high availability(oka server ki chala req's velthey server crash avutadi)
-->to scale-up services
-  docker service scale serv_name=req no
-  docker service scale flm=3
-->chk serv's created or not
-  docker service ls
-->prathi server ki velli cont create ayyindho ledo ani chk cheyyadam kashtam so give cmd
-  docker service ps serv_name
-  docker service ps flm
-->to scale-down services
-  docker service scale serv_name=req no
-  docker service scale flm=1
+CLASS-15
 ->
-
 
 
 
