@@ -13,7 +13,15 @@ CREATING REPOSITORY IN ECR
 ->search ecr n create a repo-name in repository and click on create.
 ->goto repo n chk any images available or not
 ->before pushing images to ecr, we need to create provide authentication to ecs
-
+->to communicate one serv to another serv we need to provide IAM permissions
+->in aws serach bar search for IAM>goto roles>create a role>in serv give ec2>next>sel admin access>next>give any role-name>create role
+->now attach that role to ec2
+    sel ec2 instance>actions>security>modify iam role>sel cretaed role>update iam role
+TO PUSH IMAGE TO ECR
+->no need to create image, jst we should have source code n dockerfile
+->now goto ecr>we can see option view push commands
+->now run each cmd one by one in server
+->
 
 
 
