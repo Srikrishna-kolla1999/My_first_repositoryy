@@ -129,6 +129,7 @@ so loadbalancer use chesthey traffic equal ga veltadi
 IQ - what is dif b/w nodeport n loadbalancer?
 nodeport req's anni oka server ki ey veltai, ade loadbalancer lo aithey req's distribute avutai
 PRACTICAL IMPLEMENTATION OF SERVCIES
+1. clusterIP
 ->Create a server vth t3micro, 25gb n attach iam role also(which created previously)
 ->install kops,attach s3 bucket also n install kubectl 
 ->create a pod
@@ -158,12 +159,43 @@ spec:
     app: swiggy
   ports:
     - port: 1111
-    targetPort: 80
+      targetPort: 80
 NOTE - 1 to access app curl ip:1111
        2 port= svc port, targetport = app port
        3 targetport lo p capital
 explanation - oka pod lo chala conts unnai, oka cont ni ip:1111 tho access chesamu- appudu a cont ki req ela veltadi antey, 1st mana browser nunchi req svc ki veltadi, a svc nunchi particular target cont ki veltadi
+->to see list of svc's
+    kubectl get services
+ manaki o/p lo cluster-ip vastadi
+->to create a service
+    kubectl create -f service.yml
+->to access app, goto any worker-node of cluster, give cmd
+        curl cluster-ip:1111
+2.nodeport
+->no need to write new manifest file, jst change svc name n type
+vim myservice.yml
+apiVersion: v1
+kind: Service
+metadata:
+  -name: my2ndservice
+spec:
+  type: NodePort
+  selector:
+    app: swiggy
+  ports:
+    - port: 1111
+      targetPort: 80
+      nodePort: 30002
+->to create a service
+    kubectl create -f service.yml      
+->to chk svc's
+    kubectl get svc
+->to access app
+    ip:nodeport
 ->
+
+  
+ 
 
 
     
