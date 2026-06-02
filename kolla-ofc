@@ -211,7 +211,8 @@ spec:
 ->chk svc created or not
         kubectl get svc
 -> we can access using nodeport/dns
-->
+-> access vth dns using dns:1111
+
 
   
  
