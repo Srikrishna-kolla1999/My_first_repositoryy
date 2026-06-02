@@ -115,16 +115,20 @@ K8S SERVICES
     iii)LoadBalancer
 ->ClusterIP = to access cont within the same server
     for db's,logs,scripts....
-    it provides static ip
+    we get static-ip
     using curl cmd we can chk(curl static-ip=ey server lo create chesthey danloney access chesukovali)
 ->NodePort = to access cont within the same server n host/node/instance/server
     nodeport range - 30,000 to 32,767
+    we get static-ip,nodeport
     to access app server_ip:range
     we can access app internally n externally(server_ip:port)
 IQ - why shd be that particular range for a nodeport service?
 scenario - suppose mana app 2 nodes lo run avutundi, a cont ki nodeport thoney create chesamu. users ki 2 server ip's ichamu but ey server aina vadachu.Lst's assume oka server ey use chestunaru anukundam, appudu req's anni a server ki ey veltai so app down ayye chance undi.
 so loadbalancer use chesthey traffic equal ga veltadi
-->LoadBalancer =
+->LoadBalancer = to expose our app's we use loadbalancer
+    using loadbalancer we'n access app internally n externally
+    we get static-ip,nodeport n dns
+->
     
 
 
