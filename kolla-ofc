@@ -192,6 +192,25 @@ spec:
     kubectl get svc
 ->to access app
     ip:nodeport
+ 3)LoadBalancer
+->creating servc
+apiVersion: v1
+kind: Service
+metadata:
+  -name: my2ndservice
+spec:
+  type: LoadBalancer
+  selector:
+    app: swiggy
+  ports:
+    - port: 1111
+      targetPort: 80
+      nodePort: 30002 //idi ivvakapothey random ga create avutadi
+->create a serv
+        kubectl create -f service.yml
+->chk svc created or not
+        kubectl get svc
+-> we can access using nodeport/dns
 ->
 
   
