@@ -159,8 +159,9 @@ spec:
   ports:
     - port: 1111
     targetPort: 80
-NOTE - 1 to access app ip:1111
+NOTE - 1 to access app curl ip:1111
        2 port= svc port, targetport = app port
+       3 targetport lo p capital
 explanation - oka pod lo chala conts unnai, oka cont ni ip:1111 tho access chesamu- appudu a cont ki req ela veltadi antey, 1st mana browser nunchi req svc ki veltadi, a svc nunchi particular target cont ki veltadi
 ->
 
