@@ -1,26 +1,12 @@
-
-CLASS-16
-->oka app image undi dani ni run cheyyali antey oka server, a server lo docker install cheyyali.but server lekunda koda containers create cheyyachu vth the help of ecs
-->using fargate in ecs we can create serverless containers(serverless mean=aws vadu chusukuntadu a servers ni)
-->ECS(elastic container service)= used to create a containers
-->ECR(elastic container registry)= used to store images
-->1st will store image in ecr and using ecs we can cretae a container
-CREATING AN IMAGE N STORING IN ECR
--> for code use https://github.com/sreenadh45/nginx.git
-->git clone tho by def ga master branch vastadi ala kakunda specific branch kavali antey
-git clone -b branch_name url
-CREATING REPOSITORY IN ECR
-->search ecr n create a repo-name in repository and click on create.
-->goto repo n chk any images available or not
-->before pushing images to ecr, we need to create provide authentication to ecs
-->to communicate one serv to another serv we need to provide IAM permissions
-->in aws serach bar search for IAM>goto roles>create a role>in serv give ec2>next>sel admin access>next>give any role-name>create role
-->now attach that role to ec2
-    sel ec2 instance>actions>security>modify iam role>sel cretaed role>update iam role
+-------------------------------------------------------------------------------------
+docker
+CLASS-16 pending
 TO PUSH IMAGE TO ECR
 ->no need to create image, jst we should have source code n dockerfile
 ->now goto ecr>we can see option view push commands
 ->now run each cmd one by one in server
+
+
 ->
 
 
