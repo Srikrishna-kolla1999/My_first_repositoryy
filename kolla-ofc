@@ -103,8 +103,6 @@ NOTE - 1.while running manifest files, make sure v is capital in apiVersion, p i
     kubectl create -f pod.yml
 -------------------------------------------------------------------------------------
 CLASS - 5 SERVICES & IT'S TYPES
-->Create a server vth t3micro, 25gb n attach iam role also(which created previously)
-->install kops,attach s3 bucket also n install kubectl 
 K8S SERVICES
 ->manam k8s lo oka pod lo cont create chestamu, a cont ki port istunnam kani, host port ekkada ivvadam ledu- so app ni access cheyyalemu
 ->in order to access app frm cont we need to expose it(using services we can expose it)
@@ -128,7 +126,45 @@ so loadbalancer use chesthey traffic equal ga veltadi
 ->LoadBalancer = to expose our app's we use loadbalancer
     using loadbalancer we'n access app internally n externally
     we get static-ip,nodeport n dns
+IQ - what is dif b/w nodeport n loadbalancer?
+nodeport req's anni oka server ki ey veltai, ade loadbalancer lo aithey req's distribute avutai
+PRACTICAL IMPLEMENTATION OF SERVCIES
+->Create a server vth t3micro, 25gb n attach iam role also(which created previously)
+->install kops,attach s3 bucket also n install kubectl 
+->create a pod
+vim pod.yml
+    apiVersion : v1
+    kind: Pod
+    metadata: 
+      name: pod1
+      labels:
+        app:swiggy
+    spec:
+      containers:
+        - name: cont1
+          image: shaikmustafa/dm
+          ports:
+            - containerPort: 80
+NOTE - It's mandatory to give label to every pod
+->create a service(service name can be anything)
+vim myservice.yml
+apiVersion: v1
+kind: Service
+metadata:
+  -name: myservice
+spec:
+  type: ClusterIP
+  selector:
+    app: swiggy
+  ports:
+    - port: 1111
+    targetPort: 80
+NOTE - 1 to access app ip:1111
+       2 port= svc port, targetport = app port
+explanation - oka pod lo chala conts unnai, oka cont ni ip:1111 tho access chesamu- appudu a cont ki req ela veltadi antey, 1st mana browser nunchi req svc ki veltadi, a svc nunchi particular target cont ki veltadi
 ->
+
+
     
 
 
