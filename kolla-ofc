@@ -101,7 +101,30 @@ NOTE - 1.while running manifest files, make sure v is capital in apiVersion, p i
 ->to run manifest file
     kubectl create -f file-name
     kubectl create -f pod.yml
-
+-------------------------------------------------------------------------------------
+CLASS - 5 SERVICES & IT'S TYPES
+->Create a server vth t3micro, 25gb n attach iam role also(which created previously)
+->install kops,attach s3 bucket also n install kubectl 
+K8S SERVICES
+->manam k8s lo oka pod lo cont create chestamu, a cont ki port istunnam kani, host port ekkada ivvadam ledu- so app ni access cheyyalemu
+->in order to access app frm cont we need to expose it(using services we can expose it)
+->k8s svc is used to expose our containers
+->there are 3 types of svc's
+    i)ClusterIP
+    ii)NodePort
+    iii)LoadBalancer
+->ClusterIP = to access cont within the same server
+    for db's,logs,scripts....
+    it provides static ip
+    using curl cmd we can chk(curl static-ip=ey server lo create chesthey danloney access chesukovali)
+->NodePort = to access cont within the same server n host/node/instance/server
+    nodeport range - 30,000 to 32,767
+    to access app server_ip:range
+    we can access app internally n externally(server_ip:port)
+IQ - why shd be that particular range for a nodeport service?
+scenario - suppose mana app 2 nodes lo run avutundi, a cont ki nodeport thoney create chesamu. users ki 2 server ip's ichamu but ey server aina vadachu.Lst's assume oka server ey use chestunaru anukundam, appudu req's anni a server ki ey veltai so app down ayye chance undi.
+so loadbalancer use chesthey traffic equal ga veltadi
+->LoadBalancer =
     
 
 
