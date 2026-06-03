@@ -2,12 +2,28 @@
 docker
 CLASS-16 pending
 TO PUSH IMAGE TO ECR
-->no need to create image, jst we should have source code n dockerfile
+->no need to create image, jst we should have source code n dockerfile(github link chudu)
 ->now goto ecr>we can see option view push commands
-->now run each cmd one by one in server
-
-
+->now run each cmd one by one in server(4 untai)
+->ecr lo chudu image vachindho ledo abi
+CREATING CONTAINER USING ECS
+->image loki velli a url copy chesuko
+->now search ecs in searchbar
+->oka server lo app untey availability undadhu,so cluster create cheyye
+->goto cluster>create cluster>def_name teesi give ur name>sel fargate>next>create
+->incase fail aithey, malli cretae cheyye,2nd tym sure ga create avutadi
+->now goto task definitions(conatiner names em undali n ey image tho run avvali)
+->in task def give any name>give container name>in image URI give image url>give cont-port based on source code>create
+->now goto clusters>click on ur cluster>in services, click on create>sel task def>in desired tasks, give how conts need to be created>in sec grp, sel ur sec_grp otherwise it will fail vth def sec_grp>create
+->takes tym to create a svc
+->now goto tasks sec, ee task sec lo manam create chesina conts kanipistai
+->to access app
+    click on one task_id>pub_ip dhagra open ani click cheyye direct ga open avutadi
+    ala prathi app open avutundho ledo chudu
+NOTE - 1.realtime lo ekkuva ecs,ecr use chestaru
+       2.dockerhub lo images koda use chesukovachu ecs ki
 ->
+
 
 
 -------------------------------------------------------------------------------------
