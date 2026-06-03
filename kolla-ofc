@@ -22,7 +22,15 @@ CREATING CONTAINER USING ECS
     ala prathi app open avutundho ledo chudu
 NOTE - 1.realtime lo ekkuva ecs,ecr use chestaru
        2.dockerhub lo images koda use chesukovachu ecs ki
-->
+DELETE A CLUSTER
+->goto cluster>sel created cluster>click on actions>del cluster>in enter phrase... give "delete ur_clustername">click on del
+->automatic ga lopala svc's koda del avutai
+TO DELETE A TASK MANAGER
+->goto task manager>sel task manager>actions>deregister
+TO DELETE AN IMAGE
+->goto ecr>sel image>give delete>click on del
+
+
 
 
 
