@@ -29,6 +29,12 @@ TO DELETE A TASK MANAGER
 ->goto task manager>sel task manager>actions>deregister
 TO DELETE AN IMAGE
 ->goto ecr>sel image>give delete>click on del
+HOW TO CREATE AN IMAGE FROM CONTAINER
+->docker commit cont_name image_name
+        docker commit cont1 myimage
+->a image nunchi malli cont create cheyye
+->
+
 
 
 
