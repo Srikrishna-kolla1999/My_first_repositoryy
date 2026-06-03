@@ -33,6 +33,8 @@ HOW TO CREATE AN IMAGE FROM CONTAINER
 ->docker commit cont_name image_name
         docker commit cont1 myimage
 ->a image nunchi malli cont create cheyye
+IQ - diff b/w kill n stop?
+CLASS -17
 ->
 
 
