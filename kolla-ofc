@@ -133,7 +133,45 @@ REPLICA-SET
 ->same like rc but rc lo equality based selector nd in rs lo set-based sel
 ->set-based-sel lo multiple labels tho sel chesukovachu
 ->now a days rs ey use chestaru
-->
+->RS manifest file
+vim pod.yml
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: myrs
+spec: 
+  replicas: 3
+  selector:
+    matchLabels:
+      app: swiggy
+  template:
+    metadata:
+      labels:
+        app: swiggy
+    spec:
+      containers:
+        - name: cont1
+          image: shaikmustafa/dm
+          ports:
+            - containerPort:80
+->create rs
+        kubectl create -f pod.yml
+->chl rs created or not
+        kubectl get rs
+->indaka rc ni del chesamu, so dani tho create aina pods koda del ayyaye
+->ippudu kottaga create ayyaye rs tho pods
+->chk list of pods, so that we can know rs nunchi vachaya
+->lets scale-in in rs
+file lo>replicas lo tagginchu
+kubectl apply pod.yml
+NOTE - same fr rc also
+->>lets scale-out in rs
+file lo>replicas lo penchu
+kubectl apply pod.yml
+NOTE - same fr rc also
+->through cmd scale-in or scale-out
+        kubectl scale rs myrs --replicas=4
+
 
   
  
