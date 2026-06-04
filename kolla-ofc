@@ -171,6 +171,12 @@ kubectl apply pod.yml
 NOTE - same fr rc also
 ->through cmd scale-in or scale-out
         kubectl scale rs myrs --replicas=4
+IQ - diff b/w kubectl apply n create?
+kubectl create - create new resources nd apply will update the changes
+NOTE - in realtime we won't use RC n RS bcz we don't have auto-scaling,we can't update image,down-time
+----------------------------------------------------------------------------
+CLASS -7
+->
 
 
   
