@@ -73,7 +73,28 @@ spec:
           ports:
             - containerPort:80
 let's divide manifest file into 3 parts
-  
+1st -part
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: myrc
+exp - creating a rc nd named myrc
+2nd-part
+spec: 
+  replicas: 3
+  matchLabes:
+    app: swiggy
+  template:
+    labels:
+      app: swiggy
+
+  3rd -part
+spec:
+      containers:
+        - name: cont1
+          image: shaikmustafa/dm
+          ports:
+            - containerPort:80
 
 
   
