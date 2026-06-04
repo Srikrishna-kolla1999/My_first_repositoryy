@@ -44,7 +44,36 @@ CLASS -17
 
 -------------------------------------------------------------------------------------
 k8s
-CLASS - 6
+CLASS - 6 REPLICATION CONTROLLER nd REPLICASET
+->launch an instance nd install kops,kubectl,create a cluster
+REPLICATION CONTROLLER
+->pod is smallest obj in kops,crash koda avutai easy ga, so pods ki gurantee ivvalemu
+->replication controller maintain desired no of pods(if needed it will create or del those)
+->RC keeps an eye desired no of pods, if pod gets deleted automatically creates new pod
+->mundu varaku pod>container now  RC>pod>container
+pod ni create chesthey, pod container ni create chestadi
+now rc will create pod, pod will create containers
+pod with replicas
+vim pod.yml
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: myrc
+spec: 
+  replicas: 3
+  matchLabes:
+    app: swiggy
+  template:
+    labels:
+      app: swiggy
+   spec:
+      containers:
+        - name: cont1
+          image: shaikmustafa/dm
+          ports:
+            - containerPort:80
+let's divide manifest file into 3 parts
+  
 
 
   
