@@ -61,12 +61,13 @@ metadata:
   name: myrc
 spec: 
   replicas: 3
-  matchLabes:
+  selector:
     app: swiggy
   template:
-    labels:
-      app: swiggy
-   spec:
+    metadata:
+      labels:
+        app: swiggy
+    spec:
       containers:
         - name: cont1
           image: shaikmustafa/dm
@@ -82,20 +83,50 @@ exp - creating a rc nd named myrc
 2nd-part
 spec: 
   replicas: 3
-  matchLabes:
+  selector:
     app: swiggy
   template:
-    labels:
-      app: swiggy
-
-  3rd -part
+    metadata:
+      labels:
+        app: swiggy
+->prathi RC ki oka template untadi, a template lo cont name, image untai. ee template nunchi ey pods create avutai
+->template lo label enduku mention chesamu antey label isthey easy ga identify cheyyadaniki. so we are selecting the swiggy by giving as label
+->create 3 pods vth the labeled template as swiggy
+3rd -part
 spec:
       containers:
         - name: cont1
           image: shaikmustafa/dm
           ports:
             - containerPort:80
-
+->execute by cmd
+        kubectl create -f pod.yml
+->chk rc created or not
+         kubectl get rc
+->chk 3 pods created or not
+         kubectl get pods
+->chk whether pods created vth same label(swiggy) or not
+            kubectl get pods --show-labels
+->lets create servc
+    vim mysvc.yml
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysvc
+spec:
+  type: LoadBalancer
+  selector:
+    app: swiggy
+  ports:
+    - port: 80
+      targetPort: 80
+->kubectl create -f mysvc.yml
+->chk svc created or not
+        kubectl get svc
+->access app vth loadbalancer
+no need to give port = loadbalancer:port
+->wanted ga pods cretae chesi, access cheyye app--we can see no downtime 
+->
 
   
  
