@@ -126,6 +126,13 @@ spec:
 ->access app vth loadbalancer
 no need to give port = loadbalancer:port
 ->wanted ga pods cretae chesi, access cheyye app--we can see no downtime 
+->to del rc
+        kubectl delete rc rc-name
+rc ni del chesthey automatic ga pods koda del avutai
+REPLICA-SET
+->same like rc but rc lo equality based selector nd in rs lo set-based sel
+->set-based-sel lo multiple labels tho sel chesukovachu
+->now a days rs ey use chestaru
 ->
 
   
