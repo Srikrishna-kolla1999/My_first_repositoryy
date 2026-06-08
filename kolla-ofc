@@ -80,7 +80,11 @@ DAEMONSETS
 ->present mana cluster lo one-master, 2-nodes. manaki cluster size saripola, so we increased one-more node then daemonset will automatically created
 NOTE -1  manam cluster ki oka cmd run cheska, cluster creation ki oka cmd vastadi dani tho patu inka konni cmds vastai, avi save chesi unchuko
 2 those cmds will help in changing the cluster size/modifications
-->
+->lets take one example, hyd city lo diff ganges untai like mafia,smuggling, thieves. prathi gange ki oka person ni secret inject chesi, city mottam lo em jarugutundi ani telusukovachu.
+->likewise prathi node lo oka daemonset pod create chestamu, ee daemonset pod prathi node ni monitor chesthu untadi(pods running,nodes) 
+-> ee monitoring status anta monitoring dashboards ki send chestadi
+->daemonset manifest file similar to deployment but kind replicas will vary
+
 
 ----------------------------------------------------------------------------
 
