@@ -41,6 +41,36 @@ CLASS -17
 -------------------------------------------------------------------------------------
 k8s daemonsets n statefulsets
 CLASS - 8
+->install kops,kubectl n attach s3
+->create cluster
+STATEFULSET
+->in k8s for app running we are using deployment, fr database we are using statefulset
+IQ- can we run db's using deployment?
+no
+->we have 2 types of app's in k8s
+1)stateless = no past data is saved
+2)stateful = stores  data forever
+->for stateless app's we use deployment nd for stateful we use staefulset
+IQ - diff b/w deployment n statefulset?
+deployment
+->pods names are random
+->pods dels randomly
+statefulset
+->pod names in sequential(flm0 flm1 flm2)
+->pods del last created(last in first out)
+IQ - why we are using statefulset for db's?
+deployment lo 2 pods unnai scaling tho increase chesthey at a tym cretae avutai, ade statefulset one by one by cloning the data frm prev pod data
+take img at 18mins
+NOTE -1 db ni deployment tho create chesamu(a db only oka data undi pod create chesetapudu,customer 2nd tym add chesadu data), now we scaled app and increased pods 2nd pod lo only oka customer data ney vastadi
+2 thats the drawback of deployment
+3 ade manam statefulset use chesthey prev data clone avutadi - so use staefulset fr db's
+->write manifest file fr deployment, observe pods are creating at a time
+->write manifest file fr statefulset, observe pods creates sequentially
+NOTE - manifest file is same fr statefulset as deployment only kind is diff
+->
+->
+
+DAEMONSETS
 ->
 
 ----------------------------------------------------------------------------
