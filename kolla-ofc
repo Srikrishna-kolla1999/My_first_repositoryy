@@ -67,11 +67,15 @@ NOTE -1 db ni deployment tho create chesamu(a db only oka data undi pod create c
 ->write manifest file fr deployment, observe pods are creating at a time
 ->write manifest file fr statefulset, observe pods creates sequentially
 NOTE - manifest file is same fr statefulset as deployment only kind is diff
-->
-->
 
 DAEMONSETS
-->
+->monitoring, logging ki use chestamu
+->suppose hyb city lo diff ganges untaru like theives, smuggling, mafia untai
+-> so ee ganges lo em jarugutundi ani teliyali antey secret ga prathi gang lo oka person ni inject chestaru
+->a persons chusthu untaru em jarugutundi prathi team lo ani
+->likewise mana cluster lo prathi pod lo em jarugutundi (cpu-utilization,pod running lo undha leda, ey worker-node ekkuva mem consume chestundi)
+->so mana cluster lo prathi worker-node lo oka pod ni create chestamu so ee pods mem usage, cpu-utilization, pod health anni gather chesi monitoring dashboards ki send chestai
+
 
 ----------------------------------------------------------------------------
 
