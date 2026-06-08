@@ -77,6 +77,9 @@ DAEMONSETS
 ->so mana cluster lo prathi worker-node lo oka pod ni create chestamu so ee pods mem usage, cpu-utilization, pod health anni gather chesi monitoring dashboards ki send chestai
 ->active ga monitor chestadi ee daemonset prathi worker node lo unna damenonset pod
 ->manifest file is same as statefulset only kind will vary nd replicas koda undavu
+->present mana cluster lo one-master, 2-nodes. manaki cluster size saripola, so we increased one-more node then daemonset will automatically created
+NOTE -1  manam cluster ki oka cmd run cheska, cluster creation ki oka cmd vastadi dani tho patu inka konni cmds vastai, avi save chesi unchuko
+2 those cmds will help in changing the cluster size/modifications
 ->
 
 ----------------------------------------------------------------------------
