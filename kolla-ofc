@@ -75,7 +75,8 @@ DAEMONSETS
 ->a persons chusthu untaru em jarugutundi prathi team lo ani
 ->likewise mana cluster lo prathi pod lo em jarugutundi (cpu-utilization,pod running lo undha leda, ey worker-node ekkuva mem consume chestundi)
 ->so mana cluster lo prathi worker-node lo oka pod ni create chestamu so ee pods mem usage, cpu-utilization, pod health anni gather chesi monitoring dashboards ki send chestai
-
+->active ga monitor chestadi ee daemonset prathi worker node lo unna damenonset pod
+-.
 
 ----------------------------------------------------------------------------
 
