@@ -85,8 +85,176 @@ NOTE -1  manam cluster ki oka cmd run cheska, cluster creation ki oka cmd vastad
 -> ee monitoring status anta monitoring dashboards ki send chestadi
 ->daemonset manifest file similar to deployment but kind replicas will vary
 
+K88S VOLUMES
+->to share data between the cont's we use vol's
+->4 types
+1)emptydir 2)hostpath 3)pv 4)pvc
+1)emptydir
+->suppose in pod we have 2 conts nd also vol, we attach this vol to conts
+->manifest file fr emptydir
+->general ga oka pod lo 2 conts create chesthey, sure ga err vastundi
+->in realtime we create pods using deployment
+vim pod.yml
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  -name: mydeploy
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: swiggy
+  template:
+    metadata:
+      Labels:
+        app: swiggy
+   spec:
+     containers:
+       - name: mycont1
+         image: nginx
+         ports:
+           - containerPort: 80
+       - name: mycont2
+         image: nginx
+         ports:
+           - containerPort: 80
+->create a deployment using cmd
+		kubectl create -f pod.yml
+->we'll see a warning that  port duplicate
+-> chk pods, we'll get a status fr pods as crashloopbackoff
+->pod ey create avvaledu kabatti goto pod nd chk the logs
+		kubectl describe pod pod-name
+   aa logs chusthey restart avutundi ani cheptadi
+->since port duplication vachindi kada, so take another image(ubuntu whcih doesnt req port)
+jst modify the 2nd container to
+     - name: mycont2
+         image: ubuntu
+->jst update the manifest file using apply cmd
+		kubectl apply -f pod.yml
+->chk pods got created, same crashloopbackoff err only
+->if we describe any pod cont1 is running but 2nd cont2 state is completed
+->realtime lo oka pod lo 2 conts untai annanmu ga- 1st lo app, 2nd cont anedi helper ani cheppukunnam ga
+-> ee helper cont deniki use chestunnam ani k8s ki cheppali, realtime lo helper cont ni diff ways lo use chesukuntaru like to store logs/backup/script execution/security
+->using cmd we'll specify for what purpose we're using that helper cont
+->eg for cmd 
+command: ["touch","aws"] = ee cmd run avvadaniki jst oka 2-3 secs pattidi
+instead we use loop command: ["while true echo "aws" sleep 10;done"]
+->in deploy file for cont2 change like nd create vol,attach vol to cont1 nd cont2
+   spec:
+     containers:
+       - name: mycont1
+         image: nginx
+         ports:
+           - containerPort: 80
+         volumeMounts:
+           - mountPath: "/tmp/jenkins"
+             name: devops
+       - name: mycont2
+         image: ubuntu
+         command: ["/bin/bash", "-c", "while true; dp echo welcome to flm; sleep 10; done"]
+         volumeMounts:
+           - mountPath: "/tmp/jenkins"
+             name: devops
+    volumes:
+      - name: devops
+        emptyDir: {}
+ 
+->same path or diff paths ki mount cheyyachu
+->now del prev deply file nd create new deploy file
+->now chk pods, 2 running lo untai(bcz 2nd cont lo cmd run avutuney untadi)
+->a cmd run avutuney untadi annam ga, adi chudam
+		kubectl logs pod-name -c cont-2
+		every 10secs ki a cmd print avutundi
+->chk data replicate avutundho ledo, go inside pod
+		kubectl exec -it pod-name -c cont1 --bash
+->now pod lo cont1 lopala ki veltadi, cd /tmp/jenkins/ > give ll> ey files undavu> create files
+->now pod lo cont2 lopala ki vellu using cmd
+		kubectl exec -it pod-name -c cont2 --bash
+->now pod lo cont2 lopala ki veltadi, cd /tmp/jenkins/ > give ll> cont1 lo create chesina files ikkada untai
+->manam vol's attach chestunam kabatti data replicate avutadi
+->but realtime lo use cheyyamu bcz pod del aithey pod lo unna vol koda del avutadi
+->but rc tho new pod create avutadi, a pod lo conts,vol create avutadi but vol empty ga untadi
+->mari manam deploy lo replicas pettamu ga. so that oka pod ni del chesina inko wroker-node lo pod lo undali ga
+NOTE - ey pod lo aithey vol create chestunamo, a pod loney untadi
+2)host-path
+->mana server lo edoka path ki vol ni mount chestanu
+->so pod to pod nd cont to cont in pod data replicate avutadi
+->incase pod del aina, inko pod create avutadi daniki automatic ga vol attach avutadi
+->to create a hostpath, jst change type as hostpath give path
+    volumes:
+      - name: devops
+        hostPath:
+          path: /tmp/mydata
+-> oka pod lopala cont1 loki velli konni files create cheyye(same fr cont2 also)
+->chk cont1 data got reflected in cont2 nd vice versa
+->ee vol lo pod del aina new pod lo koda data undadhu(if pod, vol create chesina worker node lo create aithey data store avutadi)
+3)PV n PVC
+->ikkada vol ni cloud lo create chestamu
+->a vol ni mana pods ki attach chestamu
+->cloud lo oka 100gb vol teesukuntamu, a vol nunchi oka 3 pv's create chestamu nd size istamu like
+for pv1-30gb, pv2-30gb nd pv3-30gb
+->oka pod ki enta mem kavali ani team vallu cheptaru
+->oka cont ki direct ga oka pv ni attach cheyyalemu
+->mana cont ki enta mem kavalo ani pv ni claim chesukuntamu daniney pvc antamu
+->jst pvc create chestamu, oka cont ey pv nunchi teesukovali ani manam decide cheyyalemu random ga teesukuntadi
+PRACTICAL IMPLEMENTATION OF PV nd PVC
+->goto aws>under elastic block store>volumes>in size give 25b>in tags-optional give name >click on create>copy that id
+->now goto  server write yml file for pv
+  vim pv.yml
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv1
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  awsElasticBlockStore:
+    VolumeID: that-id
+    fsType: ext4
+->now run pv file
+		kubectl create -f pv.yml
+->chk pv using cmd
+		kubectl get pv
+NOTE - no need to remember this pv file for intervie also
+PVC manifest file
+->to claim pv we need to write yml file pvc
+->create a pvc.yml
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc1
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 7Gi
+->run that pvc file using cmd
+		kubectl create -f pvc.yml
+->chk pvc created or not
+		kubectl get pvc
+->create avutadi but pending state lo untadi, attach ayyaka bound ani vastadi
+ 
+->chk pv, we observe that pv's are avaialable(that means we are not used our pv's)
+ATTACH PVC TO POD
+->jst in deploy file change type to persistentVolumeClaim nd ClaimName" pvc-1
+    volumes:
+      - name: devops
+        persistentVolumeClaim
+          ClaimName" pvc-1
+->now again create a pod
+->after creating pods,chk the pvc, it shows bound(got attached to pod)
+->now chk pv, it shows bound in status nd claim lo koda kanipistadi
+NOTE - ey pv nunchi teesukuntadi ani telidu
+
 
 ----------------------------------------------------------------------------
+
 
 
 
