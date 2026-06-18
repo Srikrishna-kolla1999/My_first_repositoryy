@@ -52,6 +52,35 @@ The above command to provide password to access argo cd
     user info>update pword
 ->login again
 
+DEPLOY APPLICATION
+->create app>any name>in pro name give default>in sync policy give automatic>in src give repo url>in revison give main>in path give ./>in cluster url automatic ga vastadi>in ns give default>create
+https://github.com/devops0014 /manifest.git
+->bcz manam ey ns create cheyyala so giving def
+->syned means github tho sync ayyindi, progressing means lopala resources cretae avutunnai, healthy antey create ayyaye
+->open it see svc,deploy create ayyaye
+->deploy>rs>pod ippudu ardam ayyindha
+->access app, jst click on svc we get dns
+->oka pod ni describe cheyyali antey, jst click on it
+->pod logs koda chudachu,dload chesukovachu
+->pod lo edaina pbm vasthey events chk chesukovachu
+ROLLBACK
+->in manifest file change image to shaikmustafa/mytetrisgame:v1
+->deploy ki image ni update chesthey new rs create ayyaye, ee rs related ga 1st oka pod cretae ayye mundu rs lo oka pod del avutadi
+->idi manam gui level lo chudachu
+->same image ey but rs,pods creation chusamu ga
+->again update image to v2
+->ippudu 3rd rs cretae ayye pods deletion,creation chudachu
+->ee version koncham ui change chesamu
+->to rollback
+    history & rollback>goto 1st version
+->ippudu koda rs lo pods deletion n creation chudachu
+NOTE - 1 mana ap out sync ki vellindi bcz not sync vth github bcz manam manual ga version change chesamu
+       2 helm charts create chesi github lo petti argocd tho deploy cheyye= avvadu
+       3 fr priv repo goto argocd settings>repo>cont repo> in cnt repo sel http n https>any name>proj default>give github uname n pwords
+
+->
+
+
 
 
 ----------------------------------------------------------------------------
