@@ -6,7 +6,27 @@ CLASS -18 pending
 
 -------------------------------------------------------------------------------------
 k8s configmaps n secrets
-CLASS - 9
+CLASS - 14 ARGOCD(gitops methodology)
+->create a cluster vth size as matser m7iflex n worker c7i flex 
+->infra=servers,db,nkts
+->ss at 7:30
+->enduku github lo pettali configuration files=manam jenkins lo webhooks concet nerchukunnam
+->like whenever dev pushes code to github automatically triggers job n app is deployed
+->likewise manifest files github lo pedithey devops person, automatic ga cluster lo app deploy avutadi
+->ss 11:55
+->this method eases devops engineer without running kubectl cmds
+->ee process(gitops) chesedi argocd
+->argocd=continous deployment
+->realtme lo ci jenkins,cd ki argocd
+    ss 14 20
+->argocd untey no need of running kubectl cmds n no need of implementing RBAC also
+        ss 21 10
+        ss 22 50
+->manaki telusu ga ani gitops tho kakunda, cli tho eg pods inc chesthey manaul ga inc chestadi but desired!=actual
+       ss 25 33
+->manual ga manifest file change chesi argocd tho cd deploy aithey,mundu chesina changes potai\
+        ss 27 45
+->cluster del aina mana files anni github untai kotta cluster chesukoni deploy cheyyachu
 ->
 
 
