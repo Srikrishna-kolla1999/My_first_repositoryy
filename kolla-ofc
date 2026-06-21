@@ -91,8 +91,112 @@ ss 8 22
 ->ramesh n suresh are frds, ippudu hyd lo koda kalisi undaam ani pakka pakka room lo doors leni room lo oka floor lo untunaru
 ->but main pbm vallu ey ravtala lopala ki pizza,zepto,zomato delivery boys direct ga vastunaru
 ->so there is no security fr us,they came up vth we'll keep a door by blocking others nd allows only u
+->nkt policies decide wy pod ey pod tho communicate avvachu n avvakodadhu
+14 24
+->in nkt policies we have ingress n rgress
+ingress=incoming req
+egress=outcoming req
+->if pod has no policy aloows every req, is there is ploicy allows specific nd not allows specific
+->pod can have mul nkt policies
+POD SELECTOR  nd NAMESPACE SELECTOR
+21 42
+PRACTICAL IMPLEMETATION
+->creating a pod vth label swiggy
+vim po1.yml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-1
+  labels:
+    app: swiggy
+spec:
+ containers:
+   - name: cont1
+     image: httpd
+     ports
+       - containerPort: 80
+->create a pod1
+->same craete pod2 also by changing pod-2
+->comm avutunaya leda antey vati ip kavali
+    kubectl get pods --o wide
+->now goto pod1
+    kubectl exec -it pod-1 --bash
+    apt update -y
+    apt install iputils-ping -y
+->now chk pod2 is communicating vth pod1 by ping pod2 ip
+->likewise chk pod1 is communicating vth pod2
+->to break comm b/w pods create a nkt policy
+->create a pod-3 vth label as app zomato nd install ping package
+->create a db pod also vth label app db
+->manam cretae chesey nkt plocy enti antey app:swiggy pods only shd communicate vth db pods
+33 58
+->lets break comm b/w all pods vth nkt policy
+vim deny_all.yml(name can be anything)
+apiVersion:networking.k8s.io/v1
+kind: NetworkPolicy
+metadata: deny_all
+spec:
+  podSelector: {} //all
+  policyTypes:
+    - Ingress
+    - Egress
+->crete nkt policy
+    kubectl create -f deny_all.yml
+->now chk pod1 pod2 shd not comminicating vth eachother
+->now establishing which pod shd comm vth particular pod
+->create incoming req for db pod
+vim allow-pod.yml
+apiVersion: networking.k8s.io/v1 
+kind: NetworkPolicy
+metadata:
+  name: allow-swiggy
+spec:
+  podSelector:
+    matchLabels:
+       app: db
+  policyTypes:
+     - Ingress 
+  ingress:
+    - from:
+        - namespaceSelector:
+             matchLabels:
+                project: test
+          podSelector:
+             matchLabels:
+                app: swiggy
+      ports:
+       - port: 80
+->create a nkt policy file
+    kubectl create -f allow-pod.yml
+->create outgoing req for db pod
+vim egress.yml
+apiVersion: networking.k8s.io/v1 
+kind: NetworkPolicy
+metadata:
+  name: db-rule
+spec:
+  podSelector:
+    matchLabels:
+       app: swiggy
+  policyTypes:
+     - Egress 
+  egress:
+    - to:
+        - namespaceSelector:
+             matchLabels:
+                project: test
+          podSelector:
+             matchLabels:
+                app: db
+      ports:
+       - port: 80
+->create a nkt policy file
+    kubectl create -f egress.yml
+->ippudu mana requirement enti swiggy pods ey db-pod tho comm avvali
 ->
 
+
+    
 
 
 
