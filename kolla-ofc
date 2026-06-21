@@ -193,7 +193,37 @@ NOTE - 1 manam deny-all nkt policy rasam kabati, manam rasina swiggy nunchi db k
 CLASS - 16 PROBES(imp)
 ->create kops vth 25 n iam role
 10:45
-->follow the uploaded notes
+->follow the uploaded notes and understand
+->project appudu idi cheptaru
+->liveness ki implement chestunnaru
+vim liveness.yml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-1
+spec:
+  containers:
+    - name: cont-1
+      image: httpd
+      ports:
+        - containerPort: 80
+      args:
+        - /bin/bash
+        - -c
+        - touch /tmp/devops; sleep 1000
+     livenessProbe:
+       exec:
+         command:
+           - cat /tmp/devops
+       initialDelaySeconds: 10
+       periodSeconds: 5
+       timeoutSeconds: 30
+->create a livesness probe
+    kubectl create -f liveness.yml
+
+ 
+
+
 
 
     
