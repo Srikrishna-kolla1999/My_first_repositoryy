@@ -189,6 +189,10 @@ NOTE - 1 manam deny-all nkt policy rasam kabati, manam rasina swiggy nunchi db k
        2 but realtime lo adi use cheyyamu, only ey pod ey pod tho comm avvali ani mention avvali ani nkt policy rastamu
        3 paina eg lo 1 way enable chesamu, 2 way cheyyali(like db ki egress n ingrees snd fr swiggy ki koda ingress n egress)
        4 5-exp vallaki adugutaru ee nkt plocies 
+----------------------------------------
+CLASS - 16 PROBES(imp)
+->create kops vth 25 n iam role
+10:45
 ->
 
 
