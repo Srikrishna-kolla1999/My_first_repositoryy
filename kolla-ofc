@@ -5,7 +5,7 @@ CLASS -18 pending
 
 
 -------------------------------------------------------------------------------------
-k8s configmaps n secrets
+k8s
 CLASS - 14 ARGOCD(gitops methodology)
 ->create a cluster vth size as matser m7iflex n worker c7i flex 
 ->infra=servers,db,nkts
@@ -77,7 +77,20 @@ ROLLBACK
 NOTE - 1 mana ap out sync ki vellindi bcz not sync vth github bcz manam manual ga version change chesamu
        2 helm charts create chesi github lo petti argocd tho deploy cheyye= avvadu
        3 fr priv repo goto argocd settings>repo>cont repo> in cnt repo sel http n https>any name>proj default>give github uname n pwords
-
+---------------------------------------------------------------------------
+CLASS - 15 NETWORK PLOCICIES
+->minikube is enough vth 25gb
+->minikube ni ila start chestamu but network policies ki calico tho start chestamu
+    minikube start --cni=calico --force
+->ade kops ki aithey calico install cheyyali(search in browser for installing calico in kops)
+->docker lo nkts ni use chesi ey cont ey cont tho communicate avvali nd ey cont ey cont communicatae avvakodadu ani nkt tho decide chesamu
+->in our cluster we have 3 ns's and pods in it, in k8s every pod is communicated irrespective of same ns or not
+ss 8 22
+->paina img lo fe communicating vth db that not crt so, we have to restrict the comm
+->to restrict the comm b/w pods we use nkts in k8s
+->ramesh n suresh are frds, ippudu hyd lo koda kalisi undaam ani pakka pakka room lo doors leni room lo oka floor lo untunaru
+->but main pbm vallu ey ravtala lopala ki pizza,zepto,zomato delivery boys direct ga vastunaru
+->so there is no security fr us,they came up vth we'll keep a door by blocking others nd allows only u
 ->
 
 
