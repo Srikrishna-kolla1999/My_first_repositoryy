@@ -204,11 +204,11 @@ metadata:
 spec:
   containers:
     - name: cont-1
-      image: ubuntu
+      image: httpd
       ports:
         - containerPort: 80
       command:
-        - /bin/bash
+        - /bin/sh
         - -c
         - touch /tmp/devops; sleep 1000
      livenessProbe:
