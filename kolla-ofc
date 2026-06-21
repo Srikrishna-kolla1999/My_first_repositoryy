@@ -204,22 +204,23 @@ metadata:
 spec:
   containers:
     - name: cont-1
-      image: httpd
+      image: ubuntu
       ports:
         - containerPort: 80
       args:
-        - /bin/bash
+        - /bin/sh
         - -c
         - touch /tmp/devops; sleep 1000
      livenessProbe:
        exec:
          command:
            - cat /tmp/devops
-       initialDelaySeconds: 10
-       periodSeconds: 5
-       timeoutSeconds: 30
+       initialDelaySeconds: 10    //10sec ki start chestadi health chk cheyyadam
+       periodSeconds: 5           //for every 5 chks
+       timeoutSeconds: 30         // incase response rakapothey 30secs varaku wait chestadi
 ->create a livesness probe
     kubectl create -f liveness.yml
+->
 
  
 
