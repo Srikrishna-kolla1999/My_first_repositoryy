@@ -220,7 +220,9 @@ spec:
        timeoutSeconds: 30         // incase response rakapothey 30secs varaku wait chestadi
 ->create a livesness probe
     kubectl create -f liveness.yml
-->
+->describe chesthey telustadi liveness
+->wanted ga pod lopala ki velli a file del cheyye,now describe n see that kubelet kills the cont n creates new cont
+->kubelet ki liveness probe ey cheptadi restart cheyyamani
 
  
 
