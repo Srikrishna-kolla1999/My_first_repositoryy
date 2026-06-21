@@ -207,8 +207,8 @@ spec:
       image: ubuntu
       ports:
         - containerPort: 80
-      args:
-        - /bin/sh
+      command:
+        - /bin/bash
         - -c
         - touch /tmp/devops; sleep 1000
      livenessProbe:
