@@ -145,7 +145,7 @@ spec:
 ->now chk pod1 pod2 shd not comminicating vth eachother
 ->now establishing which pod shd comm vth particular pod
 ->create incoming req for db pod
-vim allow-pod.yml
+vim allow-swiggy-to-db.yml
 apiVersion: networking.k8s.io/v1 
 kind: NetworkPolicy
 metadata:
@@ -158,18 +158,13 @@ spec:
      - Ingress 
   ingress:
     - from:
-        - namespaceSelector:
-             matchLabels:
-                project: test
-          podSelector:
+        - podSelector:
              matchLabels:
                 app: swiggy
-      ports:
-       - port: 80
 ->create a nkt policy file
     kubectl create -f allow-pod.yml
 ->create outgoing req for db pod
-vim egress.yml
+vim allow-swiggy-egress-to-db.yml
 apiVersion: networking.k8s.io/v1 
 kind: NetworkPolicy
 metadata:
@@ -182,17 +177,18 @@ spec:
      - Egress 
   egress:
     - to:
-        - namespaceSelector:
-             matchLabels:
-                project: test
-          podSelector:
+        - podSelector:
              matchLabels:
                 app: db
       ports:
        - port: 80
 ->create a nkt policy file
-    kubectl create -f egress.yml
-->ippudu mana requirement enti swiggy pods ey db-pod tho comm avvali
+    kubectl create -f allow-swiggy-egress-to-db.yml
+->ippudu mana requirement enti swiggy pods ey db-pod tho comm avvali,chk cheye
+NOTE - 1 manam deny-all nkt policy rasam kabati, manam rasina swiggy nunchi db ki comm avutundi
+       2 but realtime lo adi use cheyyamu, only ey pod ey pod tho comm avvali ani mention avvali ani nkt policy rastamu
+       3 paina eg lo 1 way enable chesamu, 2 way cheyyali(like db ki egress n ingrees snd fr swiggy ki koda ingress n egress)
+       4 5-exp vallaki adugutaru ee nkt plocies 
 ->
 
 
