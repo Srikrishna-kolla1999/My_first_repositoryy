@@ -44,9 +44,14 @@ spec:
         image: nginx
         ports:
           - containerPort: 80
-->create a pod
-->
-
+->create a podaffinity for pod-6 and chk whether it created in db pod or not
+->create another pod by changing name n chk whether it created in db pod or not
+PRACTICAL IMPLEMENTATION OF PODANTIAFFINITY
+->manifest file is same as podaffinity only give podantiaffinity instead of podaffinity
+->podantiaffinity antey a db-pod lo kakunda inka ey worker-node lo aina create avutadi
+->requiredDuringScheduling|IgnoredDuringExecution:
+requiredDuringScheduling=pod create ayyetapudu db pod untey ney create avvali ani
+IgnoredDuringExecution=db pod lekapoina(crash/del) create aina pod akkadey undali ani
 
 
 -------------------------------------------------------------------------------------
