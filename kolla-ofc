@@ -1,7 +1,14 @@
 -------------------------------------------------------------------------------------
 docker
 CLASS -18 pending
--> 
+PODAFFINITY
+eg - i am doing job(i can report to chennai/bnglr/hyd) n have GF stays in hyd, i wanna enjoy so i choose hyd only
+likewise mana db pod ekkada untey akkadey app pod create chestamu bcz latency lekunda undadaniki
+NODEAFFINITY
+eg - nak job ledu, nen coaching teesukundam anukuntunna either bnglr/hyd/chennai. na close frd bnglr lo untadu vadi dhaga ki velthey chadukolemu so i choose hyd
+antey oka particular node lo manam pod create cheyyakodadhu anukunnapudu nodeaffinity use chestamu
+PRACTICAL IMPLEMENTATION OF PODAFFINITY
+->
 
 
 -------------------------------------------------------------------------------------
