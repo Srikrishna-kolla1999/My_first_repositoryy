@@ -7,8 +7,46 @@ likewise mana db pod ekkada untey akkadey app pod create chestamu bcz latency le
 NODEAFFINITY
 eg - nak job ledu, nen coaching teesukundam anukuntunna either bnglr/hyd/chennai. na close frd bnglr lo untadu vadi dhaga ki velthey chadukolemu so i choose hyd
 antey oka particular node lo manam pod create cheyyakodadhu anukunnapudu nodeaffinity use chestamu
+->create a db pod
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-6
+  labels
+    layer: db
+spec:
+    containers:
+      - name: db-container
+        image: nginx
+        ports:
+          - containerPort: 80
+->create a db pod
 PRACTICAL IMPLEMENTATION OF PODAFFINITY
+-> creating a pod-6 for podaffinity in db pod
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-6
+  labels
+    layer: app
+spec:
+  affinity:
+    podAffinity:requiredDuringSchedulingIgnoredDuringExecution:
+       - labelSelector:
+            matchExpressions:
+               - key: layer
+                 operator: In
+                 values:
+                 - db
+        topologyKey: kubernetes.io/hostname
+    containers:
+      - name: nginx-container
+        image: nginx
+        ports:
+          - containerPort: 80
+->create a pod
 ->
+
 
 
 -------------------------------------------------------------------------------------
