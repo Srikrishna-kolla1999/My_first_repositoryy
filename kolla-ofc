@@ -60,7 +60,7 @@ Terraform
 ->manual ga mugguriki create cheyyali antey kashtam but ade oka 100servers create cheyyali antey entha kashtam
 ->oka particular app ki infra chala untadi, ala chala app's ki infra create cheyyadam kashtam
 ->infra edaina pbm vasthey production lo chala pbms untai
-->suppose infra collapse aithey malli create cheyyali antey kashtam
+->suppose prod infra collapse aithey malli create cheyyali scratch nunchi antey entha kashtam(either telisi undali/doc/)
 ->
 
 
