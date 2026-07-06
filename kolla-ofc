@@ -55,8 +55,13 @@ IgnoredDuringExecution=db pod lekapoina(crash/del) create aina pod akkadey undal
 
 
 -------------------------------------------------------------------------------------
-k8s
-
+Terraform
+->oka dev,tester,ops team nunchi nak oka server create cheyyamani adigaru vth some req are diff
+->manual ga mugguriki create cheyyali antey kashtam but ade oka 100servers create cheyyali antey entha kashtam
+->oka particular app ki infra chala untadi, ala chala app's ki infra create cheyyadam kashtam
+->infra edaina pbm vasthey production lo chala pbms untai
+->suppose infra collapse aithey malli create cheyyali antey kashtam
+->
 
 
 
