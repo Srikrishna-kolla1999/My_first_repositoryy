@@ -81,6 +81,13 @@ terraform plan - it compares written code with cloud and shows result like no ch
 terraform apply - resource is created and upadted in state file, that
 created data will be stored in statefile
 NOTE - suppose if we change smtg in  tf file we need to perform perform the cmds perform,apply
+PRACTICAL IMPLEMENTATION OF A CREATING A EC2 INSTANCE
+INSTALLATION OF TERRAFORM
+->install terrafoerm>goto developer.hashicorp.com>linux>redhat>paste those cmds in server
+EC2 INSTANCE VIA TF
+->while writing tf file we have 3 sections like provider(include cloud n region),resource,variables
+38 38
+->vim any_name.tf(extension is imp)
 ->
 
 
