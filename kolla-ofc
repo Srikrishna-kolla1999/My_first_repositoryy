@@ -88,6 +88,12 @@ EC2 INSTANCE VIA TF
 ->while writing tf file we have 3 sections like provider(include cloud n region),resource,variables
 38 38
 ->vim any_name.tf(extension is imp)
+->provider loney region mention cheyyali
+->in resource given as web jst like labelling fr ease identification
+->ami lo ey region lo create chestunamo, a region ami id ivvali
+->as of key_name mundu create chesina SG name ivvu
+->availability_zone lo 
+47 50
 ->
 
 
