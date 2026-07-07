@@ -61,7 +61,16 @@ Terraform
 ->oka particular app ki infra chala untadi, ala chala app's ki infra create cheyyadam kashtam
 ->infra edaina pbm vasthey production lo chala pbms untai
 ->suppose prod infra collapse aithey malli create cheyyali scratch nunchi antey entha kashtam(either telisi undali/doc/)
-->
+IAC
+WITHOUT IAC
+->refer class notes
+->instead of creating servers manually we create servers using code
+->iac ki chala tools unnai but why terraform(support all clouds)
+ss 21 20
+->TF nerchukuntey ey cloud lo aina infra create cheyyachu
+->TF uses HCL lang hashicorp configuration lang
+
+
 
 
 
