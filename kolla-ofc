@@ -69,6 +69,19 @@ WITHOUT IAC
 ss 21 20
 ->TF nerchukuntey ey cloud lo aina infra create cheyyachu
 ->TF uses HCL lang hashicorp configuration lang
+->ansible ni use chesi create chesina infra lo dependices/tools/app/server update/file exec install cheyyadaniki ansible ni use chestamu
+WHT IS TERRAFORM
+23 53
+HOW TERRAFORM WORKS
+24 26
+TERRAFORM LIFECYCLE
+26 34
+terraform init - it downloads all mentioned particular cloud all modules
+terraform plan - it compares written code with cloud and shows result like no changes or 1 to add(if it shd create)
+terraform apply - resource is created and upadted in state file, that
+created data will be stored in statefile
+NOTE - suppose if we change smtg in  tf file we need to perform perform the cmds perform,apply
+->
 
 
 
