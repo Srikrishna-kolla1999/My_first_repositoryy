@@ -76,7 +76,7 @@ HOW TERRAFORM WORKS
 24 26
 TERRAFORM LIFECYCLE
 26 34
-terraform init - it downloads all mentioned particular cloud all modules
+terraform init - when we initialize terrform init, creates a .terraform folder (it downloads all mentioned particular cloud all modules)
 terraform plan - it compares written code with cloud and shows result like no changes or 1 to add(if it shd create)
 terraform apply - resource is created and upadted in state file, that
 created data will be stored in statefile
