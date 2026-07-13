@@ -198,8 +198,75 @@ NOTE - relatime lo var ni hardcode chesthey a var ni ekkada use chesam n vatini 
 ->in order to set indentation to our tf files use terraform fmt cmd
 ->now run tf validate cmd
 tf validate cmd jst chks any errs in code
+IQ - diff b/w tf plan n tf validate?
+->now run tf plan
 ->now run tf apply
-->
+2ND WAY TO PASS VALUES FOR A VARIABLES
+->varable file def val teesesi, cli tho pass cheyyali
+->tf plan cmd run chesaka adugutadi values
+->even it will ask after running tf apply
+->even destroy tym lo koda ivvali
+->so this not recommended since we need to give everytime
+VARIABLES TEMPLATE for diff env's
+suppose we have diff env like dev test prod(having diff values fr every env)
+35 35
+->var tf file lo em values pass cheyyaledu
+->now create a file like vim dev.auto.tfvar
+here we pass values to our var's
+iname= "Dev-server"
+itype= "t3.micro"
+key= "dswarm"
+az= "us-east-2a"
+volume= 10
+ami_id= "ami_id"
+->now paasing values to test env 
+cp dev.auto.tfvar test.auto.tfvar
+->now chnage val's acordingly
+iname= "Test-server"
+itype= "c7i-flex.large"
+key= "dswarm"
+az= "us-east-2b"
+volume= 20
+ami_id= "ami_id"
+->likewise copy the test to prod
+cp test.auto.tfvar prod.auto.tfvar
+->present mana dhagra diff var files unnai, so tf doesn't know which var file it should use
+->so we need to mention which var file shd it use
+->terraform plan -var-file=dev.auto.tfvar
+->terraform apply -var-file=dev.auto.tfvar
+NOTE - likewise we can create mul resources but it will overwite, so to create mul resources we use namespaces in tf
+NAMESPACES
+->okey file tho diff resources create cheyyali antey we use namespaces
+NOTE - foe every namsepace tf creates seperate statefiles
+54 49
+->to chk in which namespace we are in 
+terraform workspace show
+->to chk list of workspaces
+terraform workspace list
+->to create a new namespace
+terraform workspace new workspce_name
+automatic ga workspace create ayye dani loki veltadi
+->now run the cmds
+terraform apply -var-file=test.auto.tfvar --auto-approve
+->likewise create workspaces and give tf apply
+->switch frm one workspace to another
+terraform workspace select workspace_name
+->chk 3 servers created or not
+->whenever we create a workspace then tf creates a tfstate folder
+->goto that folder>ll>goto particular folder n ll
+->we'll see statefiles
+NOTE - we can't destroy workspace directly, 1st del resources and then del workspace
+TO DEL RESOURCES
+->goto that workspace n destroy resources
+terraform destroy --auto-approve -var-file=var_file(test.auto.tfvar)
+TO DEL WORKSPACE
+->now goto def workspace n del workspace
+terraform workspace delete worspace_name
+VARIABLE BLOCK
+1 8 6
+QA - 1 9 30
+
+
 
 
 
