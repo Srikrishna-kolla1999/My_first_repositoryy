@@ -142,6 +142,60 @@ CLASS2 - VARIABLES N WORKSPACES
 TERRAFORM LIFECYCLE
 1 TERRAFORM INIT
 3 4 0 4 25
+2 TERRFORM PLAN
+ 6 0
+3 TERRAFORM APPLY
+6 15
+TERRAFORM BLOCKS
+6 34
+CREATING EC2 INSTANCE VTH VARIABLES
+1ST PROVIDER BLOCK
+vim provider.tf
+provider "aws" {
+region = "us-east-2"
+}
+2ND RESOURCE BLOCK
+vim resource.tf
+resource "aws_intance" "myinstace"{
+tags = {
+Name = var.iname
+}
+ami = var.ami_id
+instance_type = var.itype
+key_name = var.key
+availability_zone = "us-east-2a"  //we'n use var also but hardcoding
+root_block_device {
+volume_size = var.volume
+}
+}
+3RD VARIABLE BLOCK
+we can define variable block in resource/ var file
+vim variable.tf
+variable "iname" {
+description = "this is my instace name"   //optional
+type = string
+default = "WebServer"
+}
+variable "ami_id" {
+description = "we are using amazon linux"   //optional
+type = string
+default = "give selected region ami_id "
+}
+variable "itype" {
+type = string
+default = "t3.micro"
+}
+variable "key" {
+type = string
+default = "created key-pair name"
+}
+variable "volume" {
+type = number
+default = 20
+}
+NOTE - relatime lo var ni hardcode chesthey a var ni ekkada use chesam n vatini update cheyyadam kashtam, so better to use var block
+->now run tf init
+->in order to set indentation to our tf files use terraform fmt cmd
 ->
 
 
