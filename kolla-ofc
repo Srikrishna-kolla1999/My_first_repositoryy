@@ -265,6 +265,34 @@ terraform workspace delete worspace_name
 VARIABLE BLOCK
 1 8 6
 QA - 1 9 30
+-----------------------------------------------------------------
+CLASS3 - FOR_EACH, REPLACE, TAINT, N TARGET
+->i wanna create a 3 ec2 instaces with same configurations
+vim provider.tf
+provider "aws"{
+region "us-east-1"
+}
+->resource section
+vim provider.tf
+resource "aws_instance" "myinstance"{
+ami = "ami-06067086cf86c58e6"
+instance_type = "t3.micro"
+
+tags = {
+Name "MyServer"
+}
+key_name "tharunkp"
+count = 3
+}
+->terraform init
+->terraform plan
+->terraform apply
+NOTE - suppose nen tf tho oka 10 instaces,3 s3 buckets,...ect create chesamu to know list of resources we created using tf
+terraform state list
+REQ - my requirement is to create a 100 servers vth diff configurations that to we snd create all those in same workspace
+we use FOR_EACH concept
+->del previously created resources
+->
 
 
 
