@@ -92,8 +92,56 @@ EC2 INSTANCE VIA TF
 ->in resource given as web jst like labelling fr ease identification
 ->ami lo ey region lo create chestunamo, a region ami id ivvali
 ->as of key_name mundu create chesina SG name ivvu
-->availability_zone lo 
-47 50
+->availability_zone lo manam mention chesthey a zone lo create avutadi or it's selects by his own
+provider "aws" {
+region "ap-south-2"
+}
+ 
+resource "aws_instance" "web" {
+tags = {
+Name "Terraform-Server"
+Environment = "Dev"
+Client "Jio"
+}
+ami "ami-effa797f35095b9f7"
+instance_type = "t3.micro"
+key_name "hydkp"
+availability_zone "ap-south-2b"
+}
+NOTE - 1 if want to create a 100 servers mention count as 100/200..(anni servers aithey free credits aipotai)
+        2 by def count=1 even if we mention or not
+50 07
+->now run tf init cmd
+    terraform init
+when we run tf init, it'll read the written tf file and initialize corresponding cloud mentioned n creates a .terraform folder
+->chk .terraform folder created or not
+->now run tf plan cmd
+      terraform plan
+when we run this cmd tf scans the code, chks the errs n shows what resources need to create
+->tf plan run cheyyaganey err vastundi bcz of authentication(doesn't have permission to create resources)
+->attach iam role fr server
+->run tf plan cmd again,it'll show 1 to add(nothing but ready to create ec2 instance)
+->to create resource we need to run cmd tf apply
+->now run the tf apply cmd
+    terraform apply
+    give yes
+->now goto particular region n chk whether ec2 instance created with given settings
+NOTE - Wht if we give tf plan cmd again?
+since no changes in code it'll show no changes
+NOTE - eppudu aithey cloud lo particular resource create avutadho, a resource details anni terraform statefile lo update avutadi, manam tf plan run chesthey without changing anything in code then ec2.tf file will chk vth statefile n compares vth resource since same in both then tf plan will give no changes
+1 4 10
+->now change instance name as flm, run tf plan(tf file chks vth statefile n statefile chks vth cloud provider since not matching it'll show as 1 to add)
+->now vth changes in file, it will compare vth tf, statefile n cloud provider and update the resource
+NOTE - 1 drift is nothing but changing the resources manually
+       2 without permission to create a resource terraform apply --auto-approve
+->to destroy the created resources by terraform(don't del manually)
+    terraform destroy
+->once it is destroyed, chk it is terminated or not
+1 16 dbt session
+CLASS2 - VARIABLES N WORKSPACES
+TERRAFORM LIFECYCLE
+1 TERRAFORM INIT
+3 4 0 4 25
 ->
 
 
