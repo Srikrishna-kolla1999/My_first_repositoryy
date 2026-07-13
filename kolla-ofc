@@ -196,6 +196,9 @@ default = 20
 NOTE - relatime lo var ni hardcode chesthey a var ni ekkada use chesam n vatini update cheyyadam kashtam, so better to use var block
 ->now run tf init
 ->in order to set indentation to our tf files use terraform fmt cmd
+->now run tf validate cmd
+tf validate cmd jst chks any errs in code
+->now run tf apply
 ->
 
 
