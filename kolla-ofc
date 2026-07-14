@@ -157,8 +157,45 @@ NOTE - by def s3 bucket ki versioning enable lo undadu, so versioning attach che
 ->chk s3 created or not
 aws s3 ls
 ->to chk versioning enabled or not
-aws>search for s3> we'n see list of buckets>goto ur bukcet>we'll see versioning is on
+aws>search for s3> we'n see list of buckets>goto ur bukcet>we'll see show versions then it is on
+STRING STATEFILE IN S3 BUCKET
+->vim backend.tf
+terraform{
+backend "s3" {
+bucket = "teerform-s3-backend-77"   //created bucket name shd give
+key= "prod/terrform.tfstate"     //prod aney folder create ayye, danlo terraform.tfstate aney file store avutadi
+region="us-east-1"     //s3 bucket region
+}
+}
+->s3 lo store avvadaniki tf file rasaka init ivvali
+terrform init
+it'll ask fr like do u wanna copy existing state to new backend- give yes
+->now go n chk wheether it is storing in created prod folder
+NOTE - 1 whenever resource file is updated automatically statefile gets updated nd stored in s3 bucket
+        2 prev statefiles kanipinchali antey show versioning ni enable cheyyali anni versions kanipistai
+        3 if we del forcefully state files then wht about the statefile?in tf automatically remote statefiles are retrived
+MERGE CONFLICT 
+->suppose nen instance type t3 ni c7i ki change chesi tf apply ichanu, to apply changes it'll take 2mins in between my teammate gopi changed to m7i and gave tf apply
+->ee case tf ki koda telidu edi change cheyyali ani, so merge conflict vastadi
+53 34
+SOLUTION
+we shd lock the statefile(ila lock chesthey tf plan,apply work avvavu)
+->to lock statefile s3 provides to lock it, we need to specify use_lockfile as true
+terraform{
+backend "s3" {
+bucket = "teerform-s3-backend-77"  
+key= "prod/terrform.tfstate"    
+region="us-east-1"     
+use_lockfile=true
+}
+}
+->since we made chnages in bakend.tf file we need to give tf init
+->nowwe need to reconfigure tf init
+    terraform init -reconfigure
+->now chnage instace type n give give tf apply nd take dup server,try to give tf plan/apply throws err and says sttefile is locked
+1 10 doubts
 ->
+
 
 
 
