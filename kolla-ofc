@@ -194,7 +194,89 @@ use_lockfile=true
     terraform init -reconfigure
 ->now chnage instace type n give give tf apply nd take dup server,try to give tf plan/apply throws err and says sttefile is locked
 1 10 doubts
+---------------------------------------------------------------------
+class5 - META ARG'S, ALIAS N PROVIDERS, OUTPUTS, REFRESH, DRIFT DETECTION
+->launch instace, attach iam role also n install tf
+PROVIDERS
+->tf ki ela telustundi manam ey cloud provider tho infra create chestunam ani
+->provider sec lo aws ani ishtamu ok fine
+->tf init run chesaka a particular cloud vi download avutai
+->a cloud tho communicate ayye ela download chestundi
+->we can compare vth dockerhub, manaki oka nginx/httpd/mysql image kavali anna a dockerhub lo untai
+->likewise we have registry.terrform.io we have diff providers
+IQ - in tef we have 3 provider
+1 official 2 prtner 3 opensource
+->mana tf codes rasamu vth cureent versions, after years/mnths update avutai= mari em cheyyali
+13 0
+->so prathi sari recreate cheyyalemu ga updated versions nd latest versions stable ga undavu, so better use stable version
+CREATING RESOURCE VTH PARTICULAR VERSION
+->got registry.terrform.io>aws>on top right we see versions>sel particular version>go bottom and right we shd copy that in provider section file on top of provider
+eg
+terraform { 
+required_providers {
+aws = {
+source="hashicorp/aws"
+version = "6.50.0"
+ }
+}
+provider "aws" {
+region ="us-east-1"
+}
+->run tf init
+WHT IF WANNA MENTION RANGE OF VERSION for our infra?
+jst change  version = "6.50.0" as version = "~>6.40.0", then it will support frm 6.40 and above
+->raltime lo ila use chestaru(wont use latest n specific versions)
+ALIAS (another name)
+req - wanna create 2 instaces in 2 diff regions
+->creating 2 infra's in 2 diff regions
+1 provider section
+terraform { 
+required_providers {
+aws = {
+source="hashicorp/aws"
+version = "~>6.50.0"
+ }
+}
+provider "aws" {
+region ="us-east-1"
+}
+provider "aws" {
+region ="ap-south-1"
+}
+2 resource section
+recource "aws_intance" "web1"
+tags = { 
+Name= "NV_Intance"
+} 
+ami ="ami-002192a70217ac181"
+instance_type = "t3.micro"
+key_name = "tharunkp"
+availability_zone = "us-east-1a"
+}
+ 
+resource "aws_instance" "web2" {
+tags = {
+Name "Mumbai-Instance" 
+}
+ami ="ami-01a18c38ece67e620"
+instance_type = "t3.micro"
+key_name "pyapp"
+availability_zone = "ap-sout-1a" 
+}
+->manam provider,resource rasamu but ey provider ki ey resource ani mention cheyyala so tf ki ela telustadi
+32 47
+->so in resource we need to give aliases which we created that alias in provider section
+33 39
+34 22
+->manam alias isthey a particular resource ki a particular provider ani
+NOTE - by def tf takes 1st provider is for 1st resource but fr rest it'll not take we need to specify fr others
+->run tf init, plan,apply
 ->
+
+
+
+
+
 
 
 
