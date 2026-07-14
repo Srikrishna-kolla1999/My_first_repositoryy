@@ -79,6 +79,8 @@ volume_size= 10
 }
 }
 ->for security grp
+my sg req is ibound: 22,80
+outbound: all traffic
 vim security.tf
 resource "aws_security_group" "mysg"{
 description = "this is created by terraform"
@@ -86,21 +88,78 @@ ingress {
 from_port = 22
 to_port = 22
 protocol = "tcp"
-cidr_block = ["0.0.0.0/0"] 
+cidr_blocks = ["0.0.0.0/0"] 
 }
 ingress {
 from_port = 80
 to_port = 80
 protocol = "tcp"
-cidr_block = ["0.0.0.0/0"] 
+cidr_blocks = ["0.0.0.0/0"] 
 } 
 egress
 from_port = 0
 to_port = 0
 protocol = "-1"
-cidr_block = ["0.0.0.0/0"]
+cidr_blocks = ["0.0.0.0/0"]
 }
+NOTE - 1 by def aws creates an allow all egress rule when creating a new sg inside vpc. when creating a new sg inside a vpc, terrform will remove this def rule n require you speciifcally re-create it if you desire that rule
+        2 cide lo 0.0.0.0 isthey everyone can access(10.61.15.25 isthey only ee ip ey access chesukovachu)
+->now run tf init
+->run tf plan
+ATTACH CREATED SG TO EC2
+->oka resource ni inko resource ki attach cheyyali antey 
+syntax - resource-name.label.id
+eg - aws_security_group.mysg.id
+->resource section
+vim resource.tf
+resource "aws_instance" "web" {
+ami= "ami_id"
+instance_type="t3.micro"
+tags={
+Name="MyServer"
+}
+availability_zone="us-east-1a"
+vpc_security_group_ids=[aws_security_group.mysg.id]
+key_name="tharunkp"
+root_block_device{
+volume_size= 10
+}
+}
+->run tf plan
+->run tf apply --auto-approve
+->server loki velli chudu ec2 ki sg attach ayyindho ledo nd also chk sg lo manam pettina ingress n egress unnayo ledo
+->jst inko ingress 8080 port ki add cheyye
+PBM - in tf statefile is the brain for our infra, wht if it gets deleted or someone deleted?
+sol - we can store in s3
+why only s3?(git koda use cheyyachu ga)
+1 safe n secure if we store
+2 datais high availability
+3 versioning(maintains same file vth diff versions)
+why not git?
+1 no encryption
+2 ip,dns,db endpoints ivi anni statefile lo untai, git lo pedithey users chudagalaru
+CREATING S3 VIA TERRAFORM
+->in general we can create s3 in manual/cli/terraform
+->creating s3 using tf is pretty much easy
+vim resource.tf
+resource "aws_s3_bucket" "mybucket" {
+bucket = "terraform-s3-backend-77"  //name shd be unique
+}
+resource "aws_s3_bucket_versioning" "bersion"{
+bucket=aws_s3_bucket.mybucket.id
+}
+versioning_configuration {
+status="Enabled"
+}
+NOTE - by def s3 bucket ki versioning enable lo undadu, so versioning attach chesi enable chestamu
+->run tf plan
+->run tf apply
+->chk s3 created or not
+aws s3 ls
+->to chk versioning enabled or not
+aws>search for s3> we'n see list of buckets>goto ur bukcet>we'll see versioning is on
 ->
+
 
 
 
