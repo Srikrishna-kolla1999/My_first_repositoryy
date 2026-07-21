@@ -83,15 +83,10 @@ class -
 ----------------------------------------------------------------------------
 
 What is Docker? 
-
 Docker is a containerization platform that packages an application along with its dependencies, libraries, runtime, and configurations into a container. This ensures the application runs consistently across development, testing, staging, and production environments. 
-
 Unlike Virtual Machines, Docker containers share the host OS kernel, making them lightweight, faster to start, and more resource-efficient. 
-
 Before Docker, one of the biggest challenges was: 
-
 "It works on my machine, but not in production." 
-
 Developers build an application on their laptop, but when deployed to QA or Production, the application would fail because of: 
 Different Java versions 
 Different Python versions 
@@ -158,43 +153,24 @@ What is docker-compose, and how does it help in multi-container applications? Wh
 “Docker Compose is a tool used to manage multi-container applications using a single YAML file. It helps define services like frontend, backend, and database, and runs them together with one command. Key sections in a compose file include version, services, image or build, ports, volumes, networks, depends_on, and environment variables.” 
 -------------------------------------------------------------------------
 How do multi-stage builds work, and why are they useful? 
-
 Multi-stage builds in Docker allow us to use multiple stages in a single Dockerfile, where one stage is used for building the application and another stage is used for running it. This helps reduce image size by removing unnecessary build tools and dependencies, making the final image smaller, secure, and efficient. 
-
- 
-
- 
-
+-------------------------------------------------------------------------
 What are best practices for writing secure and efficient Dockerfiles (base images, least privilege, minimizing layers, .dockerignore, caching? 
-
 “Best practices for writing Dockerfiles include using minimal base images like Alpine to reduce size, running containers with least privilege using non-root users for security, minimizing layers by combining commands, using .dockerignore to exclude unnecessary files, and optimizing build caching by ordering instructions properly. These practices help create secure, efficient, and faster Docker images.” 
-
- 
-
+-------------------------------------------------------------------------
 How do you pass secrets and configuration to containers (env vars, files, Docker secrets, compose, runtime flags)? 
-
 “We pass secrets and configuration to containers using environment variables, configuration files, Docker Compose, runtime flags, and Docker secrets. Environment variables are commonly used for general configuration, while Docker secrets are preferred for sensitive information like passwords. In production, we avoid hardcoding values in Dockerfiles and use secure methods to manage configurations.” 
-
- 
-
+-------------------------------------------------------------------------
 How do you limit container resources (CPU, memory, pids) and why is it important? 
-
 “In Docker, we can limit container resources like memory using -m, CPU using --cpus, and processes using --pids-limit. This is important because by default containers can consume all system resources, which can lead to performance issues or crashes. Setting limits ensures fair resource usage, improves stability, and prevents misuse.” 
-
+-------------------------------------------------------------------------
 How do you inspect and troubleshoot containers (logs, exec, inspect, top, stats, events)? Provide example commands? 
-
 “To troubleshoot Docker containers, I start with docker logs to check errors. Then I use docker exec to enter the container and debug internally. docker inspect provides configuration details, docker top shows running processes, docker stats helps monitor resource usage, and docker events tracks real-time container activities. These commands help quickly identify and resolve issues.” 
-
- 
-
+-------------------------------------------------------------------------
 Describe Docker BuildKit. What advantages does it provide (parallelism, cache mounts, secrets, SSH forwarding)? 
-
 “Docker BuildKit is an advanced build engine that improves Docker image builds. It supports parallel execution of steps for faster builds, advanced caching to reuse layers efficiently, cache mounts to store dependencies, secure handling of secrets so they are not included in the image, and SSH forwarding to access private repositories. These features make builds faster, more secure, and efficient.” 
-
- 
-
+-------------------------------------------------------------------------
 How do you reduce image sizes and attack surface (distroless, Alpine vs. glibc issues, pruning, squashing, multi-stage)? 
-
 “To reduce Docker image size and attack surface, we use lightweight base images like Alpine or distroless images, remove unnecessary files, and minimize layers. Multi-stage builds help exclude build tools and keep only required artifacts. We also use Docker prune to clean unused images and .dockerignore to exclude unwanted files. While Alpine reduces size, it may have compatibility issues due to musl libc, so sometimes glibc-based images are preferred. These practices improve performance, security, and deployment efficiency.” 
 
  
