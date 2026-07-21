@@ -82,7 +82,1570 @@ class -
 
 ----------------------------------------------------------------------------
 
+What is Docker? 
 
+Docker is a containerization platform that packages an application along with its dependencies, libraries, runtime, and configurations into a container. This ensures the application runs consistently across development, testing, staging, and production environments. 
+
+Unlike Virtual Machines, Docker containers share the host OS kernel, making them lightweight, faster to start, and more resource-efficient. 
+
+Before Docker, one of the biggest challenges was: 
+
+"It works on my machine, but not in production." 
+
+Developers build an application on their laptop, but when deployed to QA or Production, the application would fail because of: 
+Different Java versions 
+Different Python versions 
+Missing libraries 
+Different OS configurations 
+Dependency conflicts 
+Docker solves this problem by packaging everything required into a portable container. 
+Before Docker 
+Developer machine: 
+Java 17 
+Maven 3.9 
+Tomcat 10 
+Production Server: 
+Plain Text 
+Java 11 
+Maven 3.6 
+Tomcat 9 
+Application works in Dev but fails in Production. 
+Error: 
+UnsupportedClassVersionError 
+Show more lines 
+With Docker 
+Dockerfile 
+FROM openjdk:17 
+COPY app.jar app.jar 
+CMD ["java","-jar","app.jar"] 
+Build image: 
+Shell 
+docker build -t myapp:v1 . 
+Show more lines 
+Run anywhere: 
+docker run myapp:v1 
+The same image runs in: 
+Developer laptop 
+QA 
+UAT 
+Production 
+without modification.  
+---------------------------------------------------------------------------
+What are environment variables? 
+Environment variables are key-value pairs used to pass configuration data to applications without hardcoding. In Docker, they are used to configure containers at runtime, such as database connections or environment settings. In Jenkins, they are used in pipelines to control build and deployment processes. They help make applications flexible, reusable, and secure across different environments  
+-------------------------------------------------------------------------
+What is the difference between an image and a container? 
+“A Docker image is a blueprint, and a Docker container is a running instance of that blueprint.” 
+-------------------------------------------------------------------------
+What’s the difference between CMD and ENTRYPOINT? When would you use each? 
+CMD is used to provide a default command for a container, which can be overridden at runtime, whereas ENTRYPOINT defines the main command that always runs and cannot be easily overridden. In practice, ENTRYPOINT is used for fixed applications, and CMD is used for passing default arguments. 
+-------------------------------------------------------------------------
+Explain the Docker image layer model. How do layers impact build caching and image size? 
+“Docker images are built in layers, where each instruction in the Dockerfile creates a separate layer. These layers are cached, which makes builds faster because unchanged layers are reused. If a layer changes, all layers after it are rebuilt. Layers also affect image size, so combining commands and optimizing layers helps reduce the overall image size.” 
+-------------------------------------------------------------------------
+How do you map ports from a container to the host? What does -p 8080:80 mean? 
+Port mapping in Docker is used to expose a container’s port to the host machine. The -p 8080:80 means port 8080 on the host is mapped to port 80 inside the container. So when we access localhost:8080, the request is forwarded to the container’s port 80.” 
+-------------------------------------------------------------------------
+What are volumes vs. bind mounts? When would you use each, and how do they affect data persistence and portability? 
+Bind-mount 
+Volumes are Docker-managed storage that provide better portability and are mainly used in production for storing persistent data like databases. Bind mounts directly map host directories into containers and are mostly used in development for live code changes. While both provide data persistence, volumes are more secure and portable compared to bind mounts. 
+-------------------------------------------------------------------------
+Named n un-named volumes? 
+In Docker, volumes can be anonymous or named. Anonymous volumes are automatically created without a name and are mainly used for temporary storage. Named volumes are explicitly created and managed by users, making them easier to reuse, manage, and share across containers. Both provide data persistence, but named volumes are preferred in production because they offer better portability and control. 
+“Docker provides different networking modes. Bridge is the default network used for communication between containers on the same host. Host network removes isolation and allows containers to use the host’s network directly, which improves performance. None network disables networking completely for security. Overlay network is used in multi-host environments like Docker Swarm to enable communication across different nodes.” 
+-------------------------------------------------------------------------
+What is docker-compose, and how does it help in multi-container applications? What are key sections in a compose file? 
+“Docker Compose is a tool used to manage multi-container applications using a single YAML file. It helps define services like frontend, backend, and database, and runs them together with one command. Key sections in a compose file include version, services, image or build, ports, volumes, networks, depends_on, and environment variables.” 
+-------------------------------------------------------------------------
+How do multi-stage builds work, and why are they useful? 
+
+Multi-stage builds in Docker allow us to use multiple stages in a single Dockerfile, where one stage is used for building the application and another stage is used for running it. This helps reduce image size by removing unnecessary build tools and dependencies, making the final image smaller, secure, and efficient. 
+
+ 
+
+ 
+
+What are best practices for writing secure and efficient Dockerfiles (base images, least privilege, minimizing layers, .dockerignore, caching? 
+
+“Best practices for writing Dockerfiles include using minimal base images like Alpine to reduce size, running containers with least privilege using non-root users for security, minimizing layers by combining commands, using .dockerignore to exclude unnecessary files, and optimizing build caching by ordering instructions properly. These practices help create secure, efficient, and faster Docker images.” 
+
+ 
+
+How do you pass secrets and configuration to containers (env vars, files, Docker secrets, compose, runtime flags)? 
+
+“We pass secrets and configuration to containers using environment variables, configuration files, Docker Compose, runtime flags, and Docker secrets. Environment variables are commonly used for general configuration, while Docker secrets are preferred for sensitive information like passwords. In production, we avoid hardcoding values in Dockerfiles and use secure methods to manage configurations.” 
+
+ 
+
+How do you limit container resources (CPU, memory, pids) and why is it important? 
+
+“In Docker, we can limit container resources like memory using -m, CPU using --cpus, and processes using --pids-limit. This is important because by default containers can consume all system resources, which can lead to performance issues or crashes. Setting limits ensures fair resource usage, improves stability, and prevents misuse.” 
+
+How do you inspect and troubleshoot containers (logs, exec, inspect, top, stats, events)? Provide example commands? 
+
+“To troubleshoot Docker containers, I start with docker logs to check errors. Then I use docker exec to enter the container and debug internally. docker inspect provides configuration details, docker top shows running processes, docker stats helps monitor resource usage, and docker events tracks real-time container activities. These commands help quickly identify and resolve issues.” 
+
+ 
+
+Describe Docker BuildKit. What advantages does it provide (parallelism, cache mounts, secrets, SSH forwarding)? 
+
+“Docker BuildKit is an advanced build engine that improves Docker image builds. It supports parallel execution of steps for faster builds, advanced caching to reuse layers efficiently, cache mounts to store dependencies, secure handling of secrets so they are not included in the image, and SSH forwarding to access private repositories. These features make builds faster, more secure, and efficient.” 
+
+ 
+
+How do you reduce image sizes and attack surface (distroless, Alpine vs. glibc issues, pruning, squashing, multi-stage)? 
+
+“To reduce Docker image size and attack surface, we use lightweight base images like Alpine or distroless images, remove unnecessary files, and minimize layers. Multi-stage builds help exclude build tools and keep only required artifacts. We also use Docker prune to clean unused images and .dockerignore to exclude unwanted files. While Alpine reduces size, it may have compatibility issues due to musl libc, so sometimes glibc-based images are preferred. These practices improve performance, security, and deployment efficiency.” 
+
+ 
+
+What are Docker content trust and image signing (Notary), and how do they fit into supply chain security? 
+
+“Docker Content Trust ensures that only trusted and signed images are pulled and run. It uses Notary to sign images with cryptographic keys. When an image is pulled, the signature is verified to ensure it has not been tampered with. This plays a key role in supply chain security by preventing the use of unauthorized or malicious images in the CI/CD pipeline.” 
+
+ 
+
+Compare Docker Swarm and Kubernetes for orchestration. When might you choose one over the other? 
+
+Docker Swarm is easy to set up and tightly integrated with Docker, suitable for small to medium applications. Kubernetes is more powerful and provides advanced features like auto-scaling, self-healing, and better resource management, making it the preferred choice for large-scale and enterprise applications. 
+
+ 
+
+ 
+
+ 
+
+ You deployed a container, but it exits immediately after starting. How would you troubleshoot it? 
+
+If a container exits immediately, first I will check the container status using docker ps -a, then check logs using docker logs to identify the error. I will inspect the container to verify CMD and ENTRYPOINT, and run it in interactive mode to debug inside the container. Usually, this happens due to application crash, wrong command, or no long-running process. 
+
+ 
+
+What is multi-stage dockerfile and how to decrease image size? 
+
+“During pip install or package installation, tools create cache and temporary files like pip cache and build artifacts. In a multi-stage Dockerfile, we avoid copying these unwanted files to the final image by copying only required dependencies, which helps reduce image size. 
+
+“When we use a single-stage Dockerfile, Docker executes each instruction and stores the entire filesystem as a layer. During ‘pip install’, cache and temporary files are also created and stored in that layer. Since Docker does not remove them automatically, they become part of the final image, increasing its size. That’s why multi-stage builds are preferred to copy only required dependencies.” 
+
+ 
+
+Eg 
+
+Without multi-stage: 
+
+FROM python:3.9 
+
+RUN pip install flask 
+
+👉 Image includes: 
+
+flask 
+
+pip cache ❌ 
+
+temp files ❌ 
+
+✅ Size: ~300MB+ 
+
+With multi-stage: 
+
+👉 Only flask copied ✅ 
+
+✅ Size: ~100MB or less 
+
+If a running Docker container suddenly stops, how do you troubleshoot it? 
+
+If a Docker container suddenly stops, I first check its status using docker ps -a and then analyze logs using docker logs to identify the root cause. I verify exit codes, check for resource issues like memory or CPU, and look for configuration problems such as missing environment variables or port conflicts. If needed, I run the container in interactive mode for deeper debugging. In DevOps, logs and monitoring are key to quickly identifying and resolving such issues. 
+
+You are building a Docker image but requirements.txt is using an old version how do you fix it? 
+
+"If requirements.txt contains outdated versions, I first update the dependencies either manually or using pip commands like pip freeze. Then I rebuild the Docker image with the --no-cache option to avoid using old cached layers. I also follow best practices like copying requirements.txt first in the Dockerfile and installing dependencies before adding application code. This ensures the container uses the correct and updated libraries. 
+
+ 
+
+What is the difference between CMD and ENTRYPOINT in Dockerfile? 
+
+CMD and ENTRYPOINT both define commands to run inside a Docker container. CMD provides a default command that can be overridden at runtime, whereas ENTRYPOINT defines a fixed command that always runs. In practice, we often use ENTRYPOINT for the main application and CMD for default arguments, which allows flexibility while maintaining a consistent execution behavior. 
+
+ 
+How do you write a multi-stage Dockerfile? 
+
+"A multi-stage Dockerfile is used to create optimized Docker images by separating the build and runtime environments. In the first stage, we build the application using all required tools and dependencies, and in the final stage, we copy only the necessary artifacts into a lightweight image. This reduces image size, improves security, and removes unnecessary files. In DevOps, multi-stage builds are widely used for efficient containerization. 
+
+ 
+If Docker shows “no space available”, how do you resolve it? 
+
+If Docker shows 'no space left on device', I first check disk usage using df and docker system df. Then I remove unused containers, images, volumes, and build cache using commands like docker system prune. I also check and clear large container logs. In DevOps, I implement regular cleanup jobs and monitoring to prevent such issues. 
+
+ 
+
+What is Docker Compose and where have you used it? 
+
+In my project, I used Docker Compose in the development environment to run multiple services like the backend application, database, and Redis cache together. It helped simplify the setup process, as developers only needed to run a single command to start all services. It also ensured consistency across environments and reduced manual errors." 
+
+ 
+
+Explain how container orchestration works and why it's important in docker?  
+
+Container orchestration is the process of managing multiple containers automatically, including deployment, scaling, and monitoring. While Docker is used to run containers, orchestration tools like Kubernetes manage them at scale. They ensure high availability, auto-scaling, and self-healing by restarting failed containers and balancing traffic. In DevOps, container orchestration is important because it enables efficient and reliable production deployments. 
+
+ 
+
+How do you write a Production-Ready Dockerfile? 
+
+In my project, I used multi-stage Dockerfiles to reduce image size from ~900MB to ~200MB. I also ensured security by running containers as non-root users and used health checks for monitoring. This helped improve performance, reduce vulnerabilities, and ensure stable production deployments. 
+
+ 
+
+What is Docker Compose and where have you used it?  
+
+“Docker Compose is a tool used to define and run multi-container applications using a simple YAML file (docker-compose.yml). It allows us to configure multiple services like application, database, and cache in one place and start them together using a single command. 
+
+Instead of running multiple docker run commands manually, we can define all services, networks, and volumes in one file and manage them easily with docker-compose up/down 
+
+In my project, I primarily used Docker Compose in development and testing environments to quickly set up dependent services. 
+
+🔹 Real-Time Example: 
+
+“We had a microservices application that required: 
+
+Backend service (Spring Boot) 
+
+Database (MySQL/PostgreSQL) 
+
+Cache (Redis) 
+
+Using Docker Compose, I created a single YAML file where all these services were defined and connected through a common network. With one command (docker-compose up), I was able to bring up the entire stack locally or in QA environments.” 
+
+ 
+
+Explain how container orchestration works and why it’s important?  
+
+“Container orchestration is the process of automatically managing containerized applications—including deployment, scaling, networking, and lifecycle—using tools like Kubernetes. 
+
+In a real-time scenario, when we deploy an application, we define the desired state in YAML (for example, 3 replicas of a service). This request goes to the Kubernetes API Server, and the Scheduler assigns pods to worker nodes based on resource availability. Then the kubelet ensures containers are created and running using the container runtime. 
+
+Once the application is running, Kubernetes continuously monitors it. If a pod crashes, it automatically restarts or replaces it (self-healing). If traffic increases, it performs auto-scaling (HPA), and for updates, it uses rolling deployments with zero downtime. It also handles service discovery and load balancing, ensuring traffic is evenly distributed across pods. 
+
+Container orchestration is important because modern applications are microservices-based, and managing multiple containers manually is complex and error-prone. With orchestration, we get high availability, scalability, fault tolerance, and efficient resource utilization. 
+
+In my project, we used Kubernetes where during peak traffic, pods scaled automatically from 3 to 10 using HPA, and in case of pod failure, Kubernetes restarted it instantly, ensuring no downtime. This significantly improved system reliability and user experience.” 
+
+ 
+
+How do you manage Role-Based Access Control (RBAC) in Jenkins or Kubernetes? 
+
+✅ Interview Answer: 
+
+“In DevOps environments, I manage access control using RBAC principles to ensure least privilege access and security.” 
+
+ 
+
+🔹 RBAC in Kubernetes: 
+
+“In Kubernetes, RBAC is implemented using Roles, ClusterRoles, RoleBindings, and ClusterRoleBindings. 
+
+Role → Defines permissions within a namespace 
+
+ClusterRole → Defines permissions at cluster level 
+
+RoleBinding → Assigns a Role to a user/service account 
+
+ClusterRoleBinding → Assigns cluster-level access 
+
+RBAC in Jenkins: 
+
+“In Jenkins, RBAC is usually managed using the Role-Based Authorization Strategy plugin. 
+
+Create roles (Admin, Developer, Viewer) 
+
+Assign permissions like build, deploy, configure 
+
+Map users or groups to these roles 
+
+✅ Real-time: 
+“In my project, I restricted production deployment access only to senior engineers and DevOps team using role-based permissions. Developers could trigger builds but not deploy to production.” 
+
+ 
+
+Write a Complete Jenkins Pipeline Code (Declarative Pipeline) 
+
+✅ Interview Answer: 
+
+“I generally use a Declarative Jenkins Pipeline for better readability, structure, and maintainability.” 
+
+pipeline { 
+
+    agent any 
+
+ 
+
+    environment { 
+
+        APP_NAME = "myapp" 
+
+        DOCKER_IMAGE = "myrepo/myapp" 
+
+        AWS_REGION = "us-east-1" 
+
+    } 
+
+ 
+
+    stages { 
+
+ 
+
+        stage('Checkout Code') { 
+
+            steps { 
+
+                git 'https://github.com/example/myapp.git' 
+
+            } 
+
+        } 
+
+ 
+
+        stage('Build') { 
+
+            steps { 
+
+                sh 'mvn clean package' 
+
+            } 
+
+        } 
+
+ 
+
+        stage('Code Quality - SonarQube') { 
+
+            steps { 
+
+                withSonarQubeEnv('SonarQube') { 
+
+                    sh 'mvn sonar:sonar' 
+
+                } 
+
+            } 
+
+        } 
+
+ 
+
+        stage('Build Docker Image') { 
+
+            steps { 
+
+                sh "docker build -t $DOCKER_IMAGE:${BUILD_NUMBER} ." 
+
+            } 
+
+        } 
+
+ 
+
+        stage('Push to Docker Registry') { 
+
+            steps { 
+
+                sh "docker push $DOCKER_IMAGE:${BUILD_NUMBER}" 
+
+            } 
+
+        } 
+
+ 
+
+        stage('Deploy to Kubernetes (Dev)') { 
+
+            steps { 
+
+                sh """ 
+
+                kubectl set image deployment/$APP_NAME \ 
+
+                $APP_NAME=$DOCKER_IMAGE:${BUILD_NUMBER} --namespace=dev 
+
+                """ 
+
+            } 
+
+        } 
+
+ 
+
+        stage('Approval for Production') { 
+
+            steps { 
+
+                input message: 'Approve Production Deployment?' 
+
+            } 
+
+        } 
+
+ 
+
+        stage('Deploy to Production') { 
+
+            steps { 
+
+                sh """ 
+
+                kubectl set image deployment/$APP_NAME \ 
+
+                $APP_NAME=$DOCKER_IMAGE:${BUILD_NUMBER} --namespace=prod 
+
+                """ 
+
+            } 
+
+        } 
+
+    } 
+
+ 
+
+    post { 
+
+        success { 
+
+            echo 'Pipeline executed successfully!' 
+
+        } 
+
+        failure { 
+
+            echo 'Pipeline failed! Please check logs.' 
+
+        } 
+
+    } 
+
+} 
+
+ 
+
+pipeline { 
+
+    agent any 
+
+ 
+
+    environment { 
+
+        APP_NAME = "myapp" 
+
+        DOCKER_IMAGE = "myrepo/myapp" 
+
+        AWS_REGION = "us-east-1" 
+
+    } 
+
+ 
+
+    stages { 
+
+ 
+
+        stage('Checkout Code') { 
+
+            steps { 
+
+                git 'https://github.com/example/myapp.git' 
+
+            } 
+
+        } 
+
+ 
+
+        stage('Build') { 
+
+            steps { 
+
+                sh 'mvn clean package' 
+
+            } 
+
+        } 
+
+ 
+
+        stage('Code Quality - SonarQube') { 
+
+            steps { 
+
+                withSonarQubeEnv('SonarQube') { 
+
+                    sh 'mvn sonar:sonar' 
+
+                } 
+
+            } 
+
+        } 
+
+ 
+
+        stage('Build Docker Image') { 
+
+            steps { 
+
+                sh "docker build -t $DOCKER_IMAGE:${BUILD_NUMBER} ." 
+
+            } 
+
+        } 
+
+ 
+
+        stage('Push to Docker Registry') { 
+
+            steps { 
+
+                sh "docker push $DOCKER_IMAGE:${BUILD_NUMBER}" 
+
+            } 
+
+        } 
+
+ 
+
+        stage('Deploy to Kubernetes (Dev)') { 
+
+            steps { 
+
+                sh """ 
+
+                kubectl set image deployment/$APP_NAME \ 
+
+                $APP_NAME=$DOCKER_IMAGE:${BUILD_NUMBER} --namespace=dev 
+
+                """ 
+
+            } 
+
+        } 
+
+ 
+
+        stage('Approval for Production') { 
+
+            steps { 
+
+                input message: 'Approve Production Deployment?' 
+
+            } 
+
+        } 
+
+ 
+
+        stage('Deploy to Production') { 
+
+            steps { 
+
+                sh """ 
+
+                kubectl set image deployment/$APP_NAME \ 
+
+                $APP_NAME=$DOCKER_IMAGE:${BUILD_NUMBER} --namespace=prod 
+
+                """ 
+
+            } 
+
+        } 
+
+    } 
+
+ 
+
+    post { 
+
+        success { 
+
+            echo 'Pipeline executed successfully!' 
+
+        } 
+
+        failure { 
+
+            echo 'Pipeline failed! Please check logs.' 
+
+        } 
+
+    } 
+
+} 
+
+ 
+
+How do you secure Docker against kernel privilege escalation exploits? 
+
+In production, securing Docker against kernel-level privilege escalation is critical because containers share the host kernel. 
+
+🔹 Key Security Practices I follow: 
+
+✅ Run containers as non-root users 
+
+USER appuser 
+
+✅ Drop unnecessary Linux capabilities 
+
+--cap-drop ALL --cap-add NET_BIND_SERVICE 
+
+✅ Use Seccomp profiles 
+
+Restrict system calls available to containers 
+
+✅ Enable AppArmor / SELinux 
+
+Enforce mandatory access control policies 
+
+✅ Use read-only root filesystem 
+
+docker run --read-only 
+
+ 
+
+ You want to run thousands of containers per host. What Linux tuning do you apply?  
+
+“When running high-density containers, I tune the Linux kernel for performance and scalability.” 
+
+ 
+
+🔹 Key Tunings: 
+
+✅ Increase file descriptors 
+
+ulimit -n 1048576 
+
+✅ Tune kernel parameters 
+
+net.core.somaxconn=65535 
+
+fs.file-max=2097152 
+
+✅ Optimize networking 
+
+Enable IPVS for Kubernetes 
+
+Increase TCP backlog 
+
+✅ Adjust cgroups & CPU scheduling 
+
+Ensure proper resource isolation 
+
+✅ Disable swap (for containers/K8s) 
+
+swapoff -a 
+
+You must ensure data at rest encryption for container volumes. How?  
+
+Interview Answer: 
+
+“To ensure data-at-rest encryption, I handle encryption at the storage layer and container level.” 
+
+ 
+
+🔹 Approaches: 
+
+✅ Cloud-native encryption 
+
+AWS EBS encryption 
+
+Azure Disk Encryption 
+
+✅ Kubernetes storage encryption 
+
+storageClass: 
+
+  parameters: 
+
+    encrypted: "true" 
+ 
+
+✅ Use encrypted filesystems 
+
+LUKS (Linux Unified Key Setup) 
+
+✅ Secret management for keys 
+
+AWS KMS, Azure Key Vault 
+
+ 
+
+How do you handle multi-cloud Docker deployments with compliance restrictions?  
+
+Interview Answer: 
+
+“In multi-cloud environments, handling compliance requires standardization, security, and governance.” 
+
+ 
+
+🔹 Strategy: 
+
+✅ Use Kubernetes for abstraction 
+
+Same deployment across AWS, Azure 
+
+✅ Use Infrastructure as Code (Terraform) 
+
+Ensures consistent infra 
+
+✅ Centralized secret management 
+
+Vault / cloud key services 
+
+✅ Implement security policies 
+
+Pod Security Policies / OPA 
+
+✅ Compliance checks 
+
+CIS benchmarks, container scanning 
+
+✅ CI/CD integration 
+
+Security gates before deployment 
+
+ 
+
+Write a complete multi-stage Dockerfile from scratch?  
+
+# Stage 1: Build stage 
+
+FROM maven:3.8-jdk-11 AS builder 
+
+WORKDIR /app 
+
+ 
+
+# Copy only dependencies first (for caching) 
+
+COPY pom.xml . 
+
+RUN mvn dependency:resolve 
+
+ 
+
+# Copy source code 
+
+COPY . . 
+
+RUN mvn clean package -DskipTests 
+
+ 
+
+# Stage 2: Runtime stage 
+
+FROM openjdk:11-jre-slim 
+
+WORKDIR /app 
+
+ 
+
+# Create non-root user 
+
+RUN useradd -m appuser 
+
+USER appuser 
+
+ 
+
+# Copy artifact from builder 
+
+COPY --from=builder /app/target/app.jar app.jar 
+
+ 
+
+# Environment variable 
+
+ENV SPRING_PROFILES_ACTIVE=prod 
+
+ 
+
+# Health check 
+
+HEALTHCHECK CMD curl -f http://localhost:8080/actuator/health || exit 1 
+
+ 
+
+# Expose port 
+
+EXPOSE 8080 
+
+ 
+
+# Run app 
+
+ENTRYPOINT ["java", "-jar", "app.jar"] 
+
+ 
+
+1. What is Docker and how does it work? 
+
+Docker is a containerization platform that packages applications along with their dependencies into containers. It works using OS-level virtualization (Linux namespaces and cgroups) to isolate applications. Docker Engine pulls images from a registry, creates containers, and runs them on the host system. 
+
+👉 Real-time: I use Docker to ensure the same application runs consistently across dev, QA, and production environments. 
+
+ 
+
+2. What is the difference between Docker image and container? 
+
+A Docker image is a read-only template that contains application code and dependencies, while a container is a running instance of that image. 
+
+Comparison: 
+
+Image 
+
+Container 
+
+Read-only template 
+
+Running instance of the image 
+
+Static (Blueprint) 
+
+Dynamic (Execution) 
+
+Stored in registry 
+
+Runs on Docker host 
+
+Example: nginx:latest 
+
+Example: Running nginx web server 
+
+👉 Image = blueprint, Container = execution 
+
+ 
+
+3. What is a Dockerfile and how do you create one? 
+
+A Dockerfile is a script that defines how to build a Docker image using a set of instructions. 
+
+Example Dockerfile: 
+
+FROM node:16-alpine 
+
+WORKDIR /app 
+
+COPY . . 
+
+RUN npm install 
+
+EXPOSE 3000 
+
+CMD ["npm", "start"] 
+
+ 
+
+Build command: 
+
+docker build -t myapp . 
+
+👉 Real-time: Used in CI/CD pipelines for automated image creation. 
+
+ 
+
+4. What are Docker volumes and bind mounts? 
+
+Volumes and bind mounts are used to persist data outside containers so data survives container restarts or deletion. 
+
+Volumes 
+
+Bind Mounts 
+
+Managed by Docker 
+
+Uses host file system path 
+
+Stored in /var/lib/docker 
+
+Custom host directory 
+
+Safer and portable 
+
+Depends on host file structure 
+
+Best for production 
+
+Best for local development 
+
+👉 Use volumes in production for reliability; bind mounts mainly for development. 
+
+ 
+
+5. What is Docker networking and its types? 
+
+Docker networking allows communication between containers and with the outside world. 
+
+Network Types: 
+
+Network Type 
+
+Description 
+
+Use Case 
+
+Bridge 
+
+Default network, single host 
+
+Basic container-to-container communication 
+
+Host 
+
+Shares host network stack 
+
+High-performance, no NAT overhead 
+
+None 
+
+No network access 
+
+Maximum isolation 
+
+Overlay 
+
+Multi-node networking 
+
+Swarm/Kubernetes clusters 
+
+Macvlan 
+
+Assign custom IP from network 
+
+Legacy app integrations 
+
+👉 Real-time: Used bridge for microservices and overlay in distributed setups. 
+
+ 
+
+6. What is the difference between CMD and ENTRYPOINT? 
+
+CMD 
+
+ENTRYPOINT 
+
+Provides default command 
+
+Defines the main fixed command 
+
+Can be overridden at runtime 
+
+Not easily overridden at runtime 
+
+Used for flexible defaults 
+
+Used for strict execution 
+
+CMD ["--server.port=8080"] 
+
+ENTRYPOINT ["java", "-jar", "app.jar"] 
+
+ 
+
+Best Practice (combined usage): 
+
+ENTRYPOINT ["java", "-jar", "app.jar"] 
+
+CMD ["--server.port=8080"] 
+
+👉 ENTRYPOINT defines what runs; CMD provides arguments. Using both gives flexibility. 
+
+ 
+
+7. How do you optimize Docker image size? 
+
+Use Alpine or minimal base images (e.g., node:16-alpine instead of node:16) 
+
+Use multi-stage builds to exclude build dependencies from the final image 
+
+Remove unnecessary files, caches, and temp files in the same RUN layer 
+
+Use .dockerignore to exclude node_modules, .git, logs, etc. 
+
+Combine multiple RUN commands using && to reduce layer count 
+
+👉 Real-time benefit: Reduced image size speeds up pull times and deployment. 
+
+ 
+
+8. What are multi-stage Docker builds? 
+
+Multi-stage builds split the build and runtime environments into separate stages. Only the required artifacts are copied to the final image, eliminating build tools and reducing image size significantly. 
+
+Example (Java App): 
+
+# Stage 1: Build 
+
+FROM maven:3.8 AS build 
+
+WORKDIR /app 
+
+COPY . . 
+
+RUN mvn package -DskipTests 
+
+ 
+
+# Stage 2: Runtime only 
+
+FROM openjdk:17-jre-slim 
+
+COPY --from=build /app/target/app.jar app.jar 
+
+ENTRYPOINT ["java", "-jar", "app.jar"] 
+
+👉 Only final artifacts are included — no Maven, no source code in the runtime image. 
+
+ 
+
+9. How do you manage Docker container logs? 
+
+Use docker logs <container_id> for quick inspection 
+
+Configure logging drivers: json-file (default), syslog, fluentd, awslogs 
+
+Centralize logs using ELK Stack (Elasticsearch, Logstash, Kibana) 
+
+Use EFK Stack (Elasticsearch, Fluentd, Kibana) in Kubernetes 
+
+Useful Commands: 
+
+docker logs container_id 
+
+docker logs -f container_id          # Follow live logs 
+
+docker logs --tail 100 container_id  # Last 100 lines 
+
+👉 Real-time: Logs shipped to Elasticsearch and visualized in Kibana dashboards. 
+
+ 
+
+10. How do you debug failed Docker containers? 
+
+A structured debugging approach for container failures: 
+
+Step 
+
+Command / Action 
+
+Purpose 
+
+1. Check logs 
+
+docker logs <container_id> 
+
+Identify startup errors 
+
+2. Inspect details 
+
+docker inspect <container_id> 
+
+View config, mounts, network 
+
+3. Access shell 
+
+docker exec -it <id> /bin/sh 
+
+Run commands inside container 
+
+4. Check exit code 
+
+docker inspect --format='{{.State.ExitCode}}' 
+
+Understand failure reason 
+
+5. Check events 
+
+docker events 
+
+View real-time container events 
+
+👉 Always start troubleshooting with logs. Common causes: wrong env variables, port conflicts, missing config. 
+
+ 
+
+11. What is Docker Compose and how does it work? 
+
+Docker Compose is used to define and run multi-container applications using a single YAML configuration file. It manages networking, volumes, and dependencies between services automatically. 
+
+Example docker-compose.yml: 
+
+version: '3.8' 
+
+services: 
+
+  app: 
+
+    image: myapp:latest 
+
+    ports: 
+
+      - '3000:3000' 
+
+    depends_on: 
+
+      - db 
+
+  db: 
+
+    image: mysql:8.0 
+
+    environment: 
+
+      MYSQL_ROOT_PASSWORD: secret 
+
+ 
+
+Run using: 
+
+docker-compose up -d    # Start in detached mode 
+
+docker-compose down     # Stop and remove containers 
+
+👉 Used in local testing environments and staging setups. 
+
+ 
+
+12. How do you secure Docker containers? 
+
+Use minimal base images (alpine, distroless) to reduce attack surface 
+
+Avoid running containers as root — use USER directive in Dockerfile 
+
+Scan images for vulnerabilities using Trivy, Snyk, or Clair 
+
+Use Docker secrets or external vaults instead of environment variables for sensitive data 
+
+Apply Linux capabilities restrictions and use seccomp/AppArmor profiles 
+
+Enable read-only file systems where applicable 
+
+Keep Docker Engine and images regularly updated 
+
+👉 Real-time: Integrated image scanning in CI pipeline before every deployment. 
+
+ 
+
+13. What is the difference between Docker Compose and Kubernetes? 
+
+Feature 
+
+Docker Compose 
+
+Kubernetes 
+
+Purpose 
+
+Local / simple multi-container apps 
+
+Production-grade orchestration 
+
+Scale 
+
+Single host only 
+
+Multi-node clusters 
+
+Complexity 
+
+Simple YAML, easy to use 
+
+Advanced, steeper learning curve 
+
+Auto-healing 
+
+Not supported 
+
+Built-in self-healing 
+
+Auto-scaling 
+
+Manual only 
+
+HPA (Horizontal Pod Autoscaler) 
+
+Load Balancing 
+
+Basic 
+
+Advanced (Ingress, Services) 
+
+Best For 
+
+Development & testing 
+
+Production microservices 
+
+👉 Docker Compose is great for dev; use Kubernetes for production-scale deployments. 
+
+ 
+
+14. How do you manage secrets in Docker? 
+
+Docker Secrets (native, works with Docker Swarm mode) 
+
+HashiCorp Vault — enterprise-grade secrets management 
+
+AWS Secrets Manager / Azure Key Vault for cloud environments 
+
+Kubernetes Secrets when deploying on K8s 
+
+Never hardcode secrets in Dockerfiles or environment variables committed to source control 
+
+Docker Swarm Example: 
+
+echo 'mypassword' | docker secret create db_password - 
+
+docker service create --secret db_password myapp 
+
+👉 Best practice: Pass secrets at runtime, never bake them into images. 
+
+ 
+
+15. How do you deploy applications using Docker? 
+
+Deployment workflow (real-world CI/CD approach): 
+
+Step 
+
+Action 
+
+Tool 
+
+1. Build 
+
+Create Docker image from Dockerfile 
+
+Docker / Jenkins 
+
+2. Tag 
+
+Tag image with version/commit hash 
+
+Docker 
+
+3. Push 
+
+Push to container registry 
+
+Docker Hub / AWS ECR 
+
+4. Pull & Deploy 
+
+Pull on server or Kubernetes cluster 
+
+Kubernetes / ECS 
+
+5. Health Check 
+
+Verify pods/containers are running 
+
+kubectl / CloudWatch 
+
+Key Commands: 
+
+docker build -t myapp:v1.0 . 
+
+docker push myrepo/myapp:v1.0 
+
+kubectl apply -f deployment.yaml 
+
+👉 Real-time: Jenkins builds image, pushes to ECR, and Kubernetes handles deployment. 
+
+ 
+
+16. How do you monitor Docker containers? 
+
+Tool 
+
+Purpose 
+
+Type 
+
+docker stats 
+
+Real-time CPU/memory usage 
+
+Built-in CLI 
+
+Prometheus + Grafana 
+
+Metrics collection and visualization 
+
+Monitoring stack 
+
+cAdvisor 
+
+Container resource usage and performance 
+
+Container-specific 
+
+ELK Stack 
+
+Log aggregation and analysis 
+
+Logging 
+
+Datadog / New Relic 
+
+Full-stack APM and monitoring 
+
+Commercial 
+
+👉 Monitor CPU, memory, network I/O, and disk I/O continuously for production health. 
+
+ 
+
+17. How do you integrate Docker with CI/CD pipelines? 
+
+Full CI/CD integration workflow: 
+
+Stage 
+
+Action 
+
+Tool 
+
+1. Code Commit 
+
+Developer pushes code to repository 
+
+Git / GitHub / GitLab 
+
+2. Trigger Pipeline 
+
+Pipeline auto-triggered on commit 
+
+Jenkins / GitHub Actions 
+
+3. Build Image 
+
+Dockerfile builds new image 
+
+Docker 
+
+4. Scan Image 
+
+Security vulnerability scanning 
+
+Trivy / Snyk 
+
+5. Push to Registry 
+
+Push to Docker Hub / ECR / ACR 
+
+Docker 
+
+6. Deploy 
+
+Apply to Kubernetes / ECS 
+
+kubectl / ArgoCD 
+
+7. Verify 
+
+Health checks and smoke tests 
+
+k8s probes / Postman 
+
+👉 Tools used: Jenkins, GitHub Actions, GitLab CI/CD for automation. 
+
+ 
+
+18. What are Docker registries and how do they work? 
+
+Docker registries store, manage, and distribute Docker images. They work by accepting push requests (uploading images) and serving pull requests (downloading images). 
+
+Registry 
+
+Type 
+
+Best For 
+
+Docker Hub 
+
+Public 
+
+Open source projects, public images 
+
+AWS ECR 
+
+Private 
+
+AWS ECS/EKS deployments 
+
+Azure ACR 
+
+Private 
+
+Azure AKS deployments 
+
+Google GCR/Artifact Registry 
+
+Private 
+
+GKE deployments 
+
+Harbor 
+
+Self-hosted 
+
+On-premise private registry 
+
+Key Commands: 
+
+docker login                          # Login to registry 
+
+docker push myrepo/myapp:v1.0         # Push image 
+
+docker pull myrepo/myapp:v1.0         # Pull image 
+
+👉 Real-time: We use AWS ECR in production, authenticated via IAM roles in CI/CD. 
+
+ 
+
+19. What are common Docker production issues and fixes? 
+
+Issue 
+
+Symptom 
+
+Fix 
+
+Container crash loop 
+
+Repeatedly starting and exiting 
+
+Check docker logs, fix app errors or env vars 
+
+Large image size 
+
+Slow build/pull times 
+
+Use multi-stage builds and Alpine images 
+
+Port conflict 
+
+Container fails to start 
+
+Change host port mapping or free the port 
+
+Data loss on restart 
+
+Data missing after container restart 
+
+Use persistent Docker volumes 
+
+Out of memory 
+
+Container killed (OOMKilled) 
+
+Set memory limits, optimize app memory usage 
+
+Slow container startup 
+
+App taking long to be ready 
+
+Add health checks and readiness probes 
+
+Security vulnerabilities 
+
+CVEs in base image 
+
+Regularly scan and update base images 
+
+👉 Always monitor logs and metrics in production. Set up alerting for container restarts. 
+
+ 
+
+20. What are best practices for Docker in production? 
+
+Use lightweight, minimal base images (Alpine, distroless) 
+
+Avoid running containers as root — use non-root USER in Dockerfile 
+
+Apply semantic versioning for image tags — never use 'latest' in production 
+
+Enable centralized logging and monitoring (Prometheus, ELK) 
+
+Use container orchestration tools like Kubernetes for scaling and self-healing 
+
+Keep containers stateless — store state externally (DB, volumes, cache) 
+
+Regularly scan images for security vulnerabilities (Trivy, Snyk) 
+
+Use health checks (HEALTHCHECK in Dockerfile, liveness/readiness probes in K8s) 
+
+Maintain immutable infrastructure — rebuild, don't patch running containers 
+
+Set resource limits (CPU and memory) on all containers 
+
+ 
+
+✅  Final Interview Closing Statement (Highly Recommended) 
+
+"In my experience, I have used Docker in CI/CD pipelines with Jenkins and Kubernetes, where I optimized image sizes using multi-stage builds, secured containers using best practices, and ensured reliable deployments with proper monitoring and logging." 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
 
 
   
@@ -93,7 +1656,7 @@ class -
 
 
 
-RESUME AT hr
+
 
 
 
