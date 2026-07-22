@@ -89,6 +89,11 @@ NOTE - mail add chesam kabatti mail vastadi confirm cheyyandi
 ->so chk cheyye 2 servers create ayyayo ledo swiggy name tho
 ->and script execute ayye, app koda run avvali
 ->it takes time to run scripts
+->oka server ni access chesukoni stress package install chesi chk cheyye 6 create avutunayo ledo
+->manam max 6 ichamu auto scaling groups lo
+NOTE - 1 del auto scaling grp(automatic ga create aina servers del avutai)
+---------------------------------------------------------------
+class - load balancer, auto- scaling-groups in aws via terraform code
 ->
 
 
