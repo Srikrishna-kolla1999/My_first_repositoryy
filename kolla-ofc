@@ -70,7 +70,13 @@ AUTO SCALING IN AWS
 ->aws>auto scaling>auto scaling groups>create auto scaling group>give name>in launch template click on create launch template
 AUTO - launch template=servers recreate avvali antey ami,sg,instance type,key pairs auto grouping ki telidhu ga avi ikkada mention chestamu
 44 21
-->
+->in create launch template>give name>in template version give version as v1>in quick start sel amazon linux
+->sel intance type as t3 micr> sel key-pair>sel security grp> sel 8gb vol>in resource tags, key as name nd give name as swiggy
+->goto advanced settings, if required give iam role>in user data give script(once server create avvaganey httpd app run avvali ani rastamu a script lo)
+->at last click on create launch template
+->now goto that auto-scaling nd refresh in the launch template, we'll see the created launch template
+->sel that launch template>next>sel 2a, 2b availability zones>next>
+
 
 
 
