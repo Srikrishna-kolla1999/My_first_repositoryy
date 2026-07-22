@@ -63,6 +63,13 @@ class 7 - VS CODE SETUP ND PROVISIONERS, IMPORT & TERRAFORMER
 
 ---------------------------------------------------------------------
 class - load balancer
+->del the created server1 n server2 servers
+->del load balancer,target groups
+AUTO SCALING IN AWS
+->servers down/crash aina automatic ga servers recreate avutai
+->aws>auto scaling>auto scaling groups>create auto scaling group>give name>in launch template click on create launch template
+AUTO - launch template=servers recreate avvali antey ami,sg,instance type,key pairs auto grouping ki telidhu ga avi ikkada mention chestamu
+44 21
 ->
 
 
