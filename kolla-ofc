@@ -92,6 +92,10 @@ NOTE - mail add chesam kabatti mail vastadi confirm cheyyandi
 ->oka server ni access chesukoni stress package install chesi chk cheyye 6 create avutunayo ledo
 ->manam max 6 ichamu auto scaling groups lo
 NOTE - 1 del auto scaling grp(automatic ga create aina servers del avutai)
+       2 del load balancer
+       3 del target grp
+       4 del launch template
+doubts 1 5
 ---------------------------------------------------------------
 class - load balancer, auto- scaling-groups in aws via terraform code
 ->
