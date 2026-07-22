@@ -75,7 +75,21 @@ AUTO - launch template=servers recreate avvali antey ami,sg,instance type,key pa
 ->goto advanced settings, if required give iam role>in user data give script(once server create avvaganey httpd app run avvali ani rastamu a script lo)
 ->at last click on create launch template
 ->now goto that auto-scaling nd refresh in the launch template, we'll see the created launch template
-->sel that launch template>next>sel 2a, 2b availability zones>next>
+->sel that launch template>next>sel 2a, 2b availability zones>next
+->add load balancer(if old exists, attach it otherwise sel create new load balancer-new ga create ayye attach avutadi)
+->sel internet facing>in listners n routing>under def routing sel create target group>next
+->give 2 in desired capacity(present enni servers running lo undali)
+->in scaling, min as 2(min enni servers undali), max as 6(max enni servers undali)
+->in automatic scaling, sel option target tracking scaling policy nd target value as 50>next
+->if u wanna get notification add sns(simple notification service)
+->in add notification>under send a notification to give name as my service notification>in with these recipients give mail>next
+->at last click on auto scaling groups
+NOTE - mail add chesam kabatti mail vastadi confirm cheyyandi
+->paina manam create chesina auto-scaling-groups lo min 2 run avvali ani mnetion chesamu
+->so chk cheyye 2 servers create ayyayo ledo swiggy name tho
+->and script execute ayye, app koda run avvali
+->it takes time to run scripts
+->
 
 
 
