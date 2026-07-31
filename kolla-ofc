@@ -71,6 +71,12 @@ efs
   yum install httpd -y && systemctl start httpd
 ->access app(it works ani vastadi) frm both servers
 ->in one server goto def path() and write some content in index.html file(<h1>WELCOME TO EFS CLASS TODAY </h1>)
+->data replicate avvadu, avvali antey kinda process cheyyali(def SG teseyyali)
+->once networks available loki vachaka>manage>def SG's teesi>server ki ey SG's unnayo avi attach cheyyali>save
+->goto attach>copy the EFS mount cmd>paste it on servers
+->before running cmd>install efs to run that cmd
+  yum install -y amazon-efs-utils
+->now run that cmd
 ->
 
 
