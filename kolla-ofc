@@ -80,6 +80,18 @@ efs
   sudo mount -t efs -o tls fs-0a4e9af84df6c7df1:/ /var/www/html
 ->now write html in index.html, it will update in both servers
 ->access app nd chk data got replicated in both server(oka server lo data update chesina inko server lo avutadi)
+IAM
+->aws lo restricted permissions ivvali antey IAM use chestamu
+->realtime lo ee IAM meda cloud-admins,aws support engineers istaru(users ni create chesi istaru)
+->mana companies ki oka aws business acc ey untadi
+->but diff ppl ki access kavali aws ki antey, iam roles create chestaru(based on requirement)
+44 00
+PRACTICAL IMPLEMENTATION OF IAM
+->aws>iam>users>create user>under usename give name>sel provide user access to aws... option>under console pword, give custom pword>def pword change chesukovali anukuntey, sel users must create a new pword option>next
+->kavali anukuntey add user to grp lo add cheyyachu/copy perm sel chesi kinda unna user ni sel chesthey automatic ga vallaki unna perms new user ki vastai
+->ala vaddu anukuntey kinda svs sel chesi a particular svs ki perm allow cheyyachu>next>create user
+->now user got added successfully and we can share details to particular user
+->for cross verification,inko browser lo create chesina user credentials tho login cheyye
 ->
 
 
