@@ -74,9 +74,12 @@ efs
 ->data replicate avvadu, avvali antey kinda process cheyyali(def SG teseyyali)
 ->once networks available loki vachaka>manage>def SG's teesi>server ki ey SG's unnayo avi attach cheyyali>save
 ->goto attach>copy the EFS mount cmd>paste it on servers
-->before running cmd>install efs to run that cmd
+->before running cmd>install efs to run that cmd in both servers
   yum install -y amazon-efs-utils
-->now run that cmd
+->now run that cmd as below in both servers
+  sudo mount -t efs -o tls fs-0a4e9af84df6c7df1:/ /var/www/html
+->now write html in index.html, it will update in both servers
+->access app nd chk data got replicated in both server(oka server lo data update chesina inko server lo avutadi)
 ->
 
 
