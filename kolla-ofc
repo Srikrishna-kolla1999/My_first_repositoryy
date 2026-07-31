@@ -62,12 +62,16 @@ class 7 - VS CODE SETUP ND PROVISIONERS, IMPORT & TERRAFORMER
 
 
 ---------------------------------------------------------------------
-class - 
-
----------------------------------------------------------------
-
+class - 123
+efs
+->to replicate data frm one availability zone to another availability zone we use efs
+->goto aws>search fr efs>create efs>under name give any name>under vpc sel ey vpc lo servers unnayo>create file system
+->open created efs>network create avvadaniki tym pattidi
+->install httpd app in both servers
+  yum install httpd -y && systemctl start httpd
+->access app(it works ani vastadi) frm both servers
+->in one server goto def path() and write some content in index.html file(<h1>WELCOME TO EFS CLASS TODAY </h1>)
 ->
-
 
 
 
