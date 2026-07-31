@@ -1,3 +1,208 @@
+1 waht is docker?
+
+2 what is docker container?
+
+3 what is key components of docker?
+
+4 docker commands and it's uses?
+
+5 how do you persist data in docker?
+
+6 how do you troubleshoot a failed docker container?
+
+7 how do you reduce docker image size?
+
+8 how do you handle secrets in docker containers?
+
+9 how do you connect multiple containers together?
+
+10 what is difference between CMD and ENTRYPOINT?
+
+11 how do you expose ports in docker?
+
+12 how do you manage environments using docker?
+
+13 how do you handle container restarts automatically?
+
+14 how do you debug "port already in use" issue in docker?
+
+15 your container uses too much cpu and memory. how to control it?
+
+16 your container can't resolve domain names. what you will check?
+
+17 how do you check all docker resources and clean up unused ones safely?
+
+18 how do you handlw container running out of disk space?
+
+19 how do you run multiple versions of the same applications in docker?
+
+20 how do you troubleshoot high cpu usage in docker container?
+
+21 how do you migrate data from one volume to another?
+
+22 how do you expose a docker service to the internet security?
+
+23 how do you inspect the filesystem of a running container?
+
+24 how do you configure a container to use a specific dns server?
+
+25 how do you restrict access to a container running on a specific ip address?
+
+26 how do you secure a docker container running a sensitive application?
+
+27 how do you connect a container to a running database container?
+
+28 how do you secure docker image before deployment?
+
+29 how do you assign a specific name to a docker container?
+
+30 how can you check the resource usage of a docker container?
+
+31 how do you create and connect a container to a custom netowrk?
+
+32 how do you create a volume and mount it in a container?
+
+33 how do you scale services using docker compose?
+
+34 what are the types of docker volumes?
+
+35 how to locate the path of a file?
+
+36 how do you reduce deployment by 40%?
+
+37 what is docker ignore and how it is useful?
+
+38 why docker caching is matter?
+
+39 force recreation of container?
+
+-----------------------------------------------------------------------
+
+SONARQUBE ERRORS
+
+1 what is k8s and what are its key components?
+
+2 how does k8s achieve high availability for applications?
+
+3 what is pod in k8s? why it is important?
+
+4 what are configmaps and secrets in k8s?how are they different?
+
+5 explain the diff b/w a deployment and statefulset in k8s?
+
+6 what is the role of services in k8s?
+
+7 what is pv and pvc?
+
+8 how does k8s perform load balancing?
+
+9 what are probes in k8s?
+
+10 what is diff b/w horizontal and vertical pod auto scaling?
+
+11 how do you deploy a pod in k8s?
+
+12 what is k8s namespace?
+
+13 how does k8s handle secrets?
+
+14 what is a k8s ingress?
+
+15 what is diff between replicasets and deployments?
+
+16 what is the k8s schedular and how does it work?
+
+17 what are taints and tolerations in k8s?
+
+18 how does k8s handle application updates?
+
+19 what are readiness and liveness probes?
+
+20 what is k8s HPA and how does it work?
+
+21 what is k8s daemonsets?
+
+22 how does k8s manage secrets securely?
+
+23 what is role of kube-proxy in k8s?
+
+24 what is k8s statefulsets and when should you use?
+
+25 what is diff job and a cron job in k8s?
+
+26 what are k8s labels and annotations?
+
+27 what is role of k8s configmaps?
+
+28 how does k8s networking work?
+
+29 what is k8s cluster autoscaler?
+
+30 what are network policies in k8s?
+
+31 what is the diff between k8s service and ingress?
+
+32 what are k8s volumes? explain their types?
+
+33 what is diff b/w pv and pvc?
+
+34 what is kubelet in k8s?
+
+35 explain the concept of k8s taints and tolerations?
+
+36 how does k8s handle rolling updates and rollbacks?
+
+37 what is k8s RBAC and how does it work?
+
+38 what is k8s helm?
+
+39 how does k8s implement service discovery?
+
+40 what is k8s federation?
+
+41 how does k8s handle application scaling?
+
+42 how k8s works and what are it?
+
+43 what is k8s admission 
+
+44 what is k8s kubeconfih?
+
+45 what is k8s canary deployment?
+
+46 how does k8s manage resource quota?
+
+47 what is k8s custom resource definition(CRD)?
+
+48 what is k8s ETCD?
+
+49 how do you secure k8s cluster?
+
+50 k8s architecture?
+
+51 application deployed in EKS but not accessible externally, how will you debug?
+
+52 how can you restrict pod-to-pod communication?
+
+-----------------------------------------------------------------------
+
+SONARQUBE ERRORS
+
+-----------------------------------------------------------------------
+
+SONARQUBE ERRORS
+
+TRIVY ERRORS
+
+-----------------------------------------------------------------------
+
+SONARQUBE ERRORS
+
+INTERVIEW QUESTIONS ON SONAR AND TRIVY
+
+AWS
+
+
 -------------------------------------------------------------------------------------
 What is Docker? 
 Docker is a containerization platform that packages an application along with its dependencies, libraries, runtime, and configurations into a container. This ensures the application runs consistently across development, testing, staging, and production environments. 
