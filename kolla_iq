@@ -78,7 +78,6 @@
 
 -----------------------------------------------------------------------
 
-SONARQUBE ERRORS
 
 1 what is k8s and what are its key components?
 
@@ -185,24 +184,13 @@ SONARQUBE ERRORS
 52 how can you restrict pod-to-pod communication?
 
 -----------------------------------------------------------------------
-
 SONARQUBE ERRORS
-
 -----------------------------------------------------------------------
-
-SONARQUBE ERRORS
-
 TRIVY ERRORS
-
 -----------------------------------------------------------------------
-
-SONARQUBE ERRORS
-
 INTERVIEW QUESTIONS ON SONAR AND TRIVY
-
+-----------------------------------------------------------------------
 AWS
-
-
 -------------------------------------------------------------------------------------
 What is Docker? 
 Docker is a containerization platform that packages an application along with its dependencies, libraries, runtime, and configurations into a container. This ensures the application runs consistently across development, testing, staging, and production environments. 
